@@ -28,9 +28,9 @@ A modern **Flutter** e-commerce application with **Clean Architecture** and **Bl
 I am a **Flutter Developer** passionate about building high-performance mobile applications. I have experience with **state management, clean architecture, and CI/CD automation**.  
 
 📩 Feel free to reach out:  
-- **LinkedIn:** [](https://www.linkedin.com/in/amin-khanzadeh-138a212b4/)
-- **GitHub:** [](https://github.com/AminKhanZadeh1)  
-- **Email:** [](aminmusic.original1@gmail.com)
+- **LinkedIn:** [linkedin.com/in/amin-khanzadeh-138a212b4](https://www.linkedin.com/in/amin-khanzadeh-138a212b4/)
+- **GitHub:** [github.com/AminKhanZadeh1](https://github.com/AminKhanZadeh1)  
+- **Email:** [aminmusic.original1@gmail.com](aminmusic.original1@gmail.com)
   
 ---
 
