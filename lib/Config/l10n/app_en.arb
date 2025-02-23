@@ -1,0 +1,16 @@
+
+{
+    "@@locale": "en",
+    "language": "English",
+    "@language":{
+        "description": "The current language"
+    },
+    "helloWorld": "Hello World",
+    "@helloWorld":{
+        "description": "The hello world text"
+    },
+    "multiLanguage": "Multi Language",
+    "@multiLanguage":{
+        "description": "App title"
+    }
+}
