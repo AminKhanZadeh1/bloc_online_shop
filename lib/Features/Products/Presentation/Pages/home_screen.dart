@@ -1,4 +1,3 @@
-import 'package:bloc_online_shop/Config/Theme/Colors/g_color.dart';
 import 'package:bloc_online_shop/Config/Theme/spinkit.dart';
 import 'package:bloc_online_shop/Features/Products/Presentation/Widgets/ads_banner_list_widget.dart';
 import 'package:bloc_online_shop/Features/Products/Presentation/Widgets/categories_widget.dart';
@@ -43,7 +42,7 @@ class _HomeScreenState extends State<HomeScreen>
         appBar: PreferredSize(
           preferredSize: Size(width, 80),
           child: Material(
-            color: Colors.white70,
+            color: Colors.lightBlue.withAlpha(110),
             shape: const RoundedRectangleBorder(
               borderRadius: BorderRadius.only(
                   bottomLeft: Radius.circular(30),
@@ -73,10 +72,17 @@ class _HomeScreenState extends State<HomeScreen>
         ),
         body: Container(
           decoration: BoxDecoration(
-              gradient: LinearGradient(colors: [
-            Colors.black,
-            Colors.grey.shade900,
-          ])),
+              gradient: LinearGradient(
+                  colors: Theme.of(context).brightness == Brightness.light
+                      ? [const Color.fromARGB(255, 255, 255, 148), Colors.white]
+                      : [
+                          const Color.fromARGB(255, 40, 15, 84),
+                          Colors.black,
+                        ]
+                  //       colors: [
+
+                  // ]
+                  )),
           child: Stack(
             children: [
               IndexedStack(
@@ -107,8 +113,7 @@ class _HomeScreenState extends State<HomeScreen>
                                     child: Text(
                                       textAlign: TextAlign.left,
                                       'Discounted',
-                                      style: TextStyle(
-                                          color: Colors.white, fontSize: 30),
+                                      style: TextStyle(fontSize: 30),
                                     ),
                                   ),
                                 ),
@@ -125,8 +130,7 @@ class _HomeScreenState extends State<HomeScreen>
                                     child: Text(
                                       textAlign: TextAlign.left,
                                       'Categories',
-                                      style: TextStyle(
-                                          color: Colors.white, fontSize: 30),
+                                      style: TextStyle(fontSize: 30),
                                     ),
                                   ),
                                 ),
@@ -137,7 +141,6 @@ class _HomeScreenState extends State<HomeScreen>
                                 const Divider(
                                   indent: 20,
                                   endIndent: 20,
-                                  color: Colors.white,
                                   thickness: 1.5,
                                 ),
                                 const SizedBox(height: 20),
@@ -149,8 +152,7 @@ class _HomeScreenState extends State<HomeScreen>
                                     child: Text(
                                       textAlign: TextAlign.left,
                                       'Top Sells',
-                                      style: TextStyle(
-                                          color: Colors.white, fontSize: 30),
+                                      style: TextStyle(fontSize: 30),
                                     ),
                                   ),
                                 ),
