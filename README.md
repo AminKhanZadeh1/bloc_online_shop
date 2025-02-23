@@ -1,16 +1,37 @@
-# bloc_online_shop
+# 🛍️ Flutter E-Commerce App
 
-A new Flutter project.
+A modern **Flutter** e-commerce application with **Clean Architecture** and **Bloc** state management. This project is designed to showcase my skills in developing scalable and maintainable Flutter applications.  
 
-## Getting Started
+## ✨ Features
+- 🔐 **Authentication** (Sign In / Sign Up)
+- 🛒 **Product Listing & Categories**
+- ❤️ **Wishlist & Cart Management**
+- 🌙 **Dark & Light Theme Support** 
+- 🛠 **Implemented with Clean Architecture & Repository Pattern**  
 
-This project is a starting point for a Flutter application.
+## 📱 Screenshots
+<img src="screenshots/home.png" width="300"/> <img src="screenshots/cart.png" width="300"/>
 
-A few resources to get you started if this is your first Flutter project:
+## 🚀 Tech Stack
+- **Flutter**
+- **Dart**
+- **Bloc (State Management)**
+- **Firebase Authentication**
+- **REST API (Dio)**
+- **shared_preferences for local storage**
+- **GitHub Actions for CI/CD**
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+## 🔗 Download APK
+[Download Latest Release](https://github.com/AminKhanZadeh1/bloc_online_shop/releases)  
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## 👨‍💻 About Me
+I am a **Flutter Developer** passionate about building high-performance mobile applications. I have experience with **state management, clean architecture, and CI/CD automation**.  
+
+📩 Feel free to reach out:  
+- **LinkedIn:** [](https://www.linkedin.com/in/amin-khanzadeh-138a212b4/)
+- **GitHub:** [](https://github.com/AminKhanZadeh1)  
+- **Email:** [](aminmusic.original1@gmail.com)
+  
+---
+
+🚀 **If you like this project, don't forget to give it a ⭐ on GitHub!**
