@@ -30,7 +30,7 @@ I am a **Flutter Developer** passionate about building high-performance mobile a
 📩 Feel free to reach out:  
 - **LinkedIn:** [linkedin.com/in/amin-khanzadeh-138a212b4](https://www.linkedin.com/in/amin-khanzadeh-138a212b4/)
 - **GitHub:** [github.com/AminKhanZadeh1](https://github.com/AminKhanZadeh1)  
-- **Email:** [aminmusic.original1@gmail.com](aminmusic.original1@gmail.com)
+- **Email:** [aminmusic.original1@gmail.com](mailto:aminmusic.original1@gmail.com)
   
 ---
 
