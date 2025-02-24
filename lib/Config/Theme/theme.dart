@@ -6,11 +6,11 @@ final ThemeData lightMode = ThemeData(
   brightness: Brightness.light,
   textTheme: TextTheme(
     bodyMedium:
-        GoogleFonts.aladin(fontSize: 18, height: 1.3, color: GColor.black),
+        GoogleFonts.aladin(fontSize: 15, height: 1.3, color: GColor.black),
     bodyLarge:
-        GoogleFonts.aladin(fontSize: 22, height: 1.3, color: GColor.black),
+        GoogleFonts.aladin(fontSize: 18, height: 1.3, color: GColor.black),
     bodySmall:
-        GoogleFonts.aladin(fontSize: 16, height: 1.3, color: GColor.black),
+        GoogleFonts.aladin(fontSize: 13, height: 1.3, color: GColor.black),
   ),
   colorScheme: const ColorScheme.light(
     primary: GColor.blue,
@@ -28,11 +28,11 @@ final ThemeData darkMode = ThemeData(
   brightness: Brightness.dark,
   textTheme: TextTheme(
     bodyMedium:
-        GoogleFonts.aladin(fontSize: 18, height: 1.3, color: GColor.whiteText),
+        GoogleFonts.aladin(fontSize: 15, height: 1.3, color: GColor.whiteText),
     bodyLarge:
-        GoogleFonts.aladin(fontSize: 22, height: 1.3, color: GColor.whiteText),
+        GoogleFonts.aladin(fontSize: 18, height: 1.3, color: GColor.whiteText),
     bodySmall:
-        GoogleFonts.aladin(fontSize: 16, height: 1.3, color: GColor.whiteText),
+        GoogleFonts.aladin(fontSize: 13, height: 1.3, color: GColor.whiteText),
   ),
   colorScheme: const ColorScheme.dark(
     primary: GColor.lightBlue,

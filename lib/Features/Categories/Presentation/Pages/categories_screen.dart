@@ -5,6 +5,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class CategoriesScreen extends StatelessWidget {
   final String category;
@@ -20,7 +21,10 @@ class CategoriesScreen extends StatelessWidget {
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
-          title: Text(capitalizeFirstLetter(category)),
+          title: Text(
+            capitalizeFirstLetter(category),
+            style: GoogleFonts.aladin(),
+          ),
           centerTitle: true,
         ),
         body: BlocBuilder<ProductBloc, ProductState>(

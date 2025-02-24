@@ -74,7 +74,7 @@ class _HomeScreenState extends State<HomeScreen>
           decoration: BoxDecoration(
               gradient: LinearGradient(
                   colors: Theme.of(context).brightness == Brightness.light
-                      ? [const Color.fromARGB(255, 255, 255, 148), Colors.white]
+                      ? [const Color.fromARGB(255, 155, 250, 183), Colors.white]
                       : [
                           const Color.fromARGB(255, 40, 15, 84),
                           Colors.black,

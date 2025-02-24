@@ -46,7 +46,7 @@ class DiscountedListWidget extends StatelessWidget {
                   child: Container(
                     decoration: BoxDecoration(
                       color: Theme.of(context).brightness == Brightness.light
-                          ? const Color.fromARGB(255, 191, 235, 255)
+                          ? const Color.fromARGB(255, 200, 238, 255)
                           : Colors.grey.shade800,
                       borderRadius: BorderRadius.circular(20),
                     ),

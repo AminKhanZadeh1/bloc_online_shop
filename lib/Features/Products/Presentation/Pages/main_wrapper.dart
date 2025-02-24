@@ -106,7 +106,7 @@ class _MainWrapperState extends State<MainWrapper> {
                       : defaultIcon,
                   color: context.watch<BottomNavCubit>().state == page
                       ? Theme.of(context).brightness == Brightness.light
-                          ? const Color.fromARGB(255, 95, 255, 151)
+                          ? Colors.black
                           : Colors.amber
                       : Theme.of(context).brightness == Brightness.light
                           ? Colors.grey[700]
@@ -126,7 +126,7 @@ class _MainWrapperState extends State<MainWrapper> {
                     style: GoogleFonts.aBeeZee(
                         color: context.watch<BottomNavCubit>().state == page
                             ? Theme.of(context).brightness == Brightness.light
-                                ? const Color.fromARGB(255, 95, 255, 151)
+                                ? Colors.black
                                 : Colors.amber
                             : Theme.of(context).brightness == Brightness.light
                                 ? Colors.grey[700]
@@ -154,7 +154,7 @@ class _MainWrapperState extends State<MainWrapper> {
               colors: Theme.of(context).brightness == Brightness.light
                   ? [
                       Colors.white,
-                      const Color.fromARGB(255, 177, 150, 252),
+                      const Color.fromARGB(255, 115, 208, 255),
                       Colors.white
                     ]
                   : [Colors.black, Colors.grey.shade900, Colors.black]),
