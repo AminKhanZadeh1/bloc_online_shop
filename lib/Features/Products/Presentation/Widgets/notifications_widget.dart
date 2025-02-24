@@ -9,9 +9,11 @@ class NotificationButton extends StatelessWidget {
   Widget build(BuildContext context) {
     final cubit = context.read<NotificationCubit>();
     return IconButton(
-      icon: const Icon(
+      icon: Icon(
         Icons.notifications,
-        color: Colors.white,
+        color: Theme.of(context).brightness == Brightness.light
+            ? Colors.grey.shade700
+            : Colors.white,
       ),
       onPressed: () {
         cubit.toggleNotificationPanel();
@@ -58,15 +60,21 @@ class NotificationButton extends StatelessWidget {
                           height: 300,
                           padding: const EdgeInsets.all(10),
                           decoration: BoxDecoration(
-                            color: Colors.grey.shade800,
+                            color:
+                                Theme.of(context).brightness == Brightness.light
+                                    ? const Color.fromARGB(255, 173, 228, 255)
+                                    : Colors.grey.shade800,
                             border: Border.all(color: Colors.white, width: 1),
                             borderRadius: BorderRadius.circular(30),
                           ),
-                          child: const Center(
+                          child: Center(
                             child: Text(
                               'No Notifications',
                               style: TextStyle(
-                                color: Colors.white,
+                                color: Theme.of(context).brightness ==
+                                        Brightness.light
+                                    ? Colors.black
+                                    : Colors.white,
                                 fontSize: 15,
                                 decoration: TextDecoration.none,
                               ),

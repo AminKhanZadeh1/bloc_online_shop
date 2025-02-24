@@ -16,7 +16,9 @@ class NotificationButtonWidget extends StatelessWidget {
             border:
                 Border.all(color: state ? Colors.white : Colors.transparent),
             borderRadius: BorderRadius.circular(50),
-            color: Colors.grey.shade800,
+            color: Theme.of(context).brightness == Brightness.light
+                ? const Color.fromARGB(255, 215, 242, 255)
+                : Colors.grey.shade800,
           ),
           height: 50,
           width: 50,

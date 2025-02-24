@@ -105,8 +105,12 @@ class _MainWrapperState extends State<MainWrapper> {
                       ? filledIcon
                       : defaultIcon,
                   color: context.watch<BottomNavCubit>().state == page
-                      ? Colors.amber
-                      : Colors.grey,
+                      ? Theme.of(context).brightness == Brightness.light
+                          ? Colors.black
+                          : Colors.amber
+                      : Theme.of(context).brightness == Brightness.light
+                          ? Colors.grey[700]
+                          : Colors.grey,
                   size: Checkbox.width * 1.5,
                 ),
               ),
@@ -121,8 +125,12 @@ class _MainWrapperState extends State<MainWrapper> {
                 child: Text(label,
                     style: GoogleFonts.aBeeZee(
                         color: context.watch<BottomNavCubit>().state == page
-                            ? Colors.amber
-                            : Colors.grey,
+                            ? Theme.of(context).brightness == Brightness.light
+                                ? Colors.black
+                                : Colors.amber
+                            : Theme.of(context).brightness == Brightness.light
+                                ? Colors.grey[700]
+                                : Colors.grey,
                         fontSize: Checkbox.width / 1.5,
                         fontWeight:
                             context.watch<BottomNavCubit>().state == page
@@ -143,7 +151,13 @@ class _MainWrapperState extends State<MainWrapper> {
           border:
               const Border(top: BorderSide(color: Colors.lightBlue, width: 2)),
           gradient: LinearGradient(
-              colors: [Colors.black, Colors.grey.shade900, Colors.black]),
+              colors: Theme.of(context).brightness == Brightness.light
+                  ? [
+                      Colors.white,
+                      const Color.fromARGB(255, 115, 208, 255),
+                      Colors.white
+                    ]
+                  : [Colors.black, Colors.grey.shade900, Colors.black]),
           borderRadius: const BorderRadius.only(
               topLeft: Radius.circular(30), topRight: Radius.circular(30))),
       child: Row(

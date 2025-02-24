@@ -17,16 +17,19 @@ class ProfileListTiles extends StatelessWidget {
       child: ListTile(
         shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(20),
-            side: const BorderSide(color: Colors.white)),
+            side: BorderSide(
+                color: Theme.of(context).brightness == Brightness.light
+                    ? Colors.black
+                    : Colors.white)),
         onTap: onTap,
         leading: Icon(
           icon,
-          color: Colors.white,
         ),
-        tileColor: Colors.grey.shade900,
+        tileColor: Theme.of(context).brightness == Brightness.light
+            ? const Color.fromARGB(255, 206, 233, 255)
+            : Colors.grey.shade900,
         title: Text(
           title,
-          style: const TextStyle(color: Colors.white),
         ),
       ),
     );

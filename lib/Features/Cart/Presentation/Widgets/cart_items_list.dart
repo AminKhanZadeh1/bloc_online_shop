@@ -13,9 +13,9 @@ class CartItemsList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(left: 15, right: 15, bottom: 8, top: 50),
+      padding: const EdgeInsets.only(left: 15, right: 15, bottom: 8, top: 80),
       child: ListView.builder(
-        itemExtent: 200,
+        itemExtent: 180,
         shrinkWrap: true,
         itemCount: state.cartItems.length,
         itemBuilder: (context, index) {
@@ -32,13 +32,20 @@ class CartItemsList extends StatelessWidget {
                   Container(
                       height: 85,
                       decoration: BoxDecoration(
-                          color: Colors.grey.shade800,
+                          border: Border.all(color: Colors.black),
+                          color:
+                              Theme.of(context).brightness == Brightness.light
+                                  ? Colors.white70
+                                  : Colors.grey.shade800,
                           borderRadius: BorderRadius.circular(20)),
                       padding: const EdgeInsets.symmetric(horizontal: 12),
                       child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
+                            const SizedBox(
+                              width: 100,
+                            ),
                             Expanded(
                               child: Column(
                                 children: [
@@ -49,11 +56,10 @@ class CartItemsList extends StatelessWidget {
                                     height: 35,
                                     child: Text(
                                       textAlign: TextAlign.center,
-                                      item.productName.length > 35
-                                          ? '${item.productName.substring(0, 32)}...'
+                                      item.productName.length > 25
+                                          ? '${item.productName.substring(0, 22)}...'
                                           : item.productName,
-                                      style: const TextStyle(
-                                          color: Colors.white, fontSize: 13),
+                                      style: const TextStyle(fontSize: 13),
                                     ),
                                   ),
                                   const SizedBox(
@@ -61,8 +67,7 @@ class CartItemsList extends StatelessWidget {
                                   ),
                                   Text(
                                     "\$${item.price}",
-                                    style: const TextStyle(
-                                        color: Colors.white, fontSize: 15),
+                                    style: const TextStyle(fontSize: 15),
                                   )
                                 ],
                               ),
@@ -71,10 +76,10 @@ class CartItemsList extends StatelessWidget {
                           ])),
                   Positioned(
                     top: -70,
-                    left: 12,
+                    left: 8,
                     child: SizedBox(
-                      height: 150,
-                      width: 110,
+                      height: 140,
+                      width: 100,
                       child: ClipRRect(
                         borderRadius: BorderRadius.circular(20),
                         child: CachedNetworkImage(
@@ -107,7 +112,10 @@ class CartItemsList extends StatelessWidget {
           height: 45,
           width: 110,
           decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(10), color: Colors.white),
+              borderRadius: BorderRadius.circular(10),
+              color: Theme.of(context).brightness == Brightness.light
+                  ? const Color.fromARGB(255, 220, 244, 255)
+                  : const Color.fromARGB(255, 18, 18, 18)),
           child:
               Row(mainAxisAlignment: MainAxisAlignment.spaceAround, children: [
             IconButton(

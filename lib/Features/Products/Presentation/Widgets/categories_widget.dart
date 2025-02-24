@@ -48,7 +48,7 @@ class CategoriesWidget extends StatelessWidget {
                     ),
                     const Text(
                       'Electronic',
-                      style: TextStyle(color: Colors.white, fontSize: 16),
+                      style: TextStyle(fontSize: 16),
                     ),
                   ],
                 ),
@@ -90,7 +90,7 @@ class CategoriesWidget extends StatelessWidget {
                     ),
                     const Text(
                       'Jewelry',
-                      style: TextStyle(color: Colors.white, fontSize: 16),
+                      style: TextStyle(fontSize: 16),
                     ),
                   ],
                 ),
@@ -132,7 +132,7 @@ class CategoriesWidget extends StatelessWidget {
                     ),
                     const Text(
                       "Men",
-                      style: TextStyle(color: Colors.white, fontSize: 16),
+                      style: TextStyle(fontSize: 16),
                     ),
                   ],
                 ),
@@ -174,7 +174,7 @@ class CategoriesWidget extends StatelessWidget {
                     ),
                     const Text(
                       "Women",
-                      style: TextStyle(color: Colors.white, fontSize: 16),
+                      style: TextStyle(fontSize: 16),
                     ),
                   ],
                 ),

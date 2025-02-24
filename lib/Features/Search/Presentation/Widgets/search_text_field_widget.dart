@@ -25,17 +25,26 @@ class _SearchTextFieldWidgetState extends State<SearchTextFieldWidget> {
         cursorColor: Colors.amber,
         style: const TextStyle(color: Colors.white),
         decoration: InputDecoration(
-            focusedBorder: OutlineInputBorder(
-                borderSide: const BorderSide(color: Colors.white),
-                borderRadius: BorderRadius.circular(15)),
-            filled: true,
-            hintText: widget.searchController.text.isEmpty ? 'Search' : null,
-            contentPadding: const EdgeInsets.symmetric(horizontal: 20),
-            hintStyle: TextStyle(color: Colors.grey.shade400),
-            fillColor: Colors.grey.shade800,
-            border: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(30),
-            )),
+          enabledBorder: OutlineInputBorder(
+              borderSide: const BorderSide(color: Colors.transparent),
+              borderRadius: BorderRadius.circular(30)),
+          focusedBorder: OutlineInputBorder(
+              borderSide: const BorderSide(color: Colors.white),
+              borderRadius: BorderRadius.circular(15)),
+          filled: true,
+          hintText: widget.searchController.text.isEmpty ? 'Search' : null,
+          contentPadding: const EdgeInsets.symmetric(horizontal: 20),
+          hintStyle: TextStyle(
+              color: Theme.of(context).brightness == Brightness.light
+                  ? Colors.grey.shade700
+                  : Colors.grey.shade400),
+          fillColor: Theme.of(context).brightness == Brightness.light
+              ? const Color.fromARGB(255, 215, 242, 255)
+              : Colors.grey.shade800,
+          border: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(30),
+          ),
+        ),
       ),
     );
   }

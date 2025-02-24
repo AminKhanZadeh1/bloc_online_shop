@@ -45,7 +45,9 @@ class DiscountedListWidget extends StatelessWidget {
                   },
                   child: Container(
                     decoration: BoxDecoration(
-                      color: Colors.grey.shade800,
+                      color: Theme.of(context).brightness == Brightness.light
+                          ? const Color.fromARGB(255, 200, 238, 255)
+                          : Colors.grey.shade800,
                       borderRadius: BorderRadius.circular(20),
                     ),
                     child: Column(
@@ -92,9 +94,7 @@ class DiscountedListWidget extends StatelessWidget {
                                           product.title.length == 25
                                               ? "${product.title.substring(0, 25)}..."
                                               : product.title,
-                                          style: const TextStyle(
-                                              color: Colors.white,
-                                              fontSize: 12),
+                                          style: const TextStyle(fontSize: 12),
                                         ),
                                       ),
                                       const SizedBox(
@@ -108,10 +108,9 @@ class DiscountedListWidget extends StatelessWidget {
                                             product.discount != null
                                                 ? "\$${product.price.toString()}"
                                                 : 'null',
-                                            style: TextStyle(
+                                            style: const TextStyle(
                                                 decoration:
                                                     TextDecoration.lineThrough,
-                                                color: Colors.grey[400],
                                                 decorationColor: Colors.red,
                                                 fontSize: 14)),
                                       )
@@ -158,7 +157,6 @@ class DiscountedListWidget extends StatelessWidget {
                                                         : product.rating.rate
                                                             .toString(),
                                                     style: const TextStyle(
-                                                        color: Colors.white,
                                                         fontSize: 13),
                                                   ),
                                                 ),
@@ -185,6 +183,7 @@ class DiscountedListWidget extends StatelessWidget {
                                                   child: Text(
                                                     "${product.discount.toString()}%",
                                                     style: const TextStyle(
+                                                        color: Colors.white,
                                                         fontSize: 11),
                                                   ),
                                                 ),
@@ -192,8 +191,9 @@ class DiscountedListWidget extends StatelessWidget {
                                                   height: 10,
                                                   child: Text(
                                                     "OFF",
-                                                    style:
-                                                        TextStyle(fontSize: 7),
+                                                    style: TextStyle(
+                                                        fontSize: 7,
+                                                        color: Colors.white),
                                                   ),
                                                 ),
                                               ],
@@ -222,8 +222,7 @@ class DiscountedListWidget extends StatelessWidget {
                               product.discount != null
                                   ? "\$${product.finalPrice.toStringAsFixed(2)}"
                                   : "\$${product.price.toString()}",
-                              style: const TextStyle(
-                                  color: Colors.white, fontSize: 17),
+                              style: const TextStyle(fontSize: 17),
                             ),
                           ),
                         )

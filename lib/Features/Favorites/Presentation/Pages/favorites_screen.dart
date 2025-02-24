@@ -16,30 +16,28 @@ class _FavoritesScreenState extends State<FavoritesScreen>
   @override
   Widget build(BuildContext context) {
     super.build(context);
-
-    return Scaffold(
-        appBar: AppBar(
-          title: const Text('Favorites'),
-        ),
-        body: BlocBuilder<FavoritesBloc, FavoritesState>(
-          builder: (context, state) {
-            if (state is FavsLoadingState) {
-              return const Center(child: spinkit);
-            } else if (state is FavsErrorState) {
-              return Center(
-                child: Text(state.message),
-              );
-            } else if (state is FavsLoadedState) {
-              if (state.favProducts.isEmpty) {
-                return const Center(
-                  child: Text('Empty'),
-                );
-              }
-              return FavItemsList(state: state);
-            }
-            return const SizedBox.shrink();
-          },
-        ));
+    return Scaffold(body: BlocBuilder<FavoritesBloc, FavoritesState>(
+      builder: (context, state) {
+        if (state is FavsLoadingState) {
+          return const Center(child: spinkit);
+        } else if (state is FavsErrorState) {
+          return Center(
+            child: Text(state.message),
+          );
+        } else if (state is FavsLoadedState) {
+          if (state.favProducts.isEmpty) {
+            return const Center(
+              child: Text(
+                'Empty',
+                style: TextStyle(fontSize: 20),
+              ),
+            );
+          }
+          return FavItemsList(state: state);
+        }
+        return const SizedBox.shrink();
+      },
+    ));
   }
 
   @override

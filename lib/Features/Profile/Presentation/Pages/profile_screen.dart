@@ -28,7 +28,7 @@ class _ProfileScreenState extends State<ProfileScreen>
               Text(
                 FirebaseAuth.instance.currentUser?.displayName.toString() ??
                     'Unknown',
-                style: const TextStyle(color: Colors.white, fontSize: 30),
+                style: const TextStyle(fontSize: 30),
               ),
               const SizedBox(
                 height: 80,
