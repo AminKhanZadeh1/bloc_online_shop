@@ -21,6 +21,7 @@ class _CartScreenState extends State<CartScreen>
       if (state is CartLoadedState) {
         if (state.cartItems.isEmpty) {
           return const Scaffold(
+            extendBody: true,
             backgroundColor: Colors.white,
             body: Center(
               child: Padding(
@@ -37,13 +38,13 @@ class _CartScreenState extends State<CartScreen>
             .map((e) => double.parse(e!.price) * e.quantity)
             .reduce((a, b) => a + b);
         return Scaffold(
+            extendBody: true,
             bottomNavigationBar: Padding(
                 padding:
                     const EdgeInsets.only(bottom: 82.0, left: 10, right: 10),
                 child: CheckoutButton(
                   total: total,
                 )),
-            extendBody: true,
             body: CartItemsList(
               state: state,
             ));

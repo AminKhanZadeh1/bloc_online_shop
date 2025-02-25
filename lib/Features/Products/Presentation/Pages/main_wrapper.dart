@@ -119,7 +119,7 @@ class _MainWrapperState extends State<MainWrapper> {
               height: 3,
             ),
             SizedBox(
-              width: 60,
+              width: 70,
               height: 18,
               child: Center(
                 child: Text(label,

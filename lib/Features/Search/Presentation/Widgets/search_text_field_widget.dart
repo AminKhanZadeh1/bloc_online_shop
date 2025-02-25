@@ -23,7 +23,6 @@ class _SearchTextFieldWidgetState extends State<SearchTextFieldWidget> {
         },
         controller: widget.searchController,
         cursorColor: Colors.amber,
-        style: const TextStyle(color: Colors.white),
         decoration: InputDecoration(
           enabledBorder: OutlineInputBorder(
               borderSide: const BorderSide(color: Colors.transparent),

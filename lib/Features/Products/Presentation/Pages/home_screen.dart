@@ -31,228 +31,243 @@ class _HomeScreenState extends State<HomeScreen>
     // final height = MediaQuery.sizeOf(context).height;
     final width = MediaQuery.sizeOf(context).width;
     super.build(context);
-    return GestureDetector(
-      onTap: () {
-        FocusScope.of(context).unfocus();
-        searchController.text = '';
-        BlocProvider.of<SearchBloc>(context).add(SearchQueryChanged(''));
+    return PopScope(
+      canPop: false,
+      onPopInvoked: (didPop) {
+        if (searchController.text.isNotEmpty) {
+          // اگر کاربر در حالت جستجو است، خروج را لغو کرده و فیلد جستجو را خالی کنیم
+          FocusScope.of(context).unfocus();
+          searchController.clear();
+          BlocProvider.of<SearchBloc>(context).add(SearchQueryChanged(''));
+        } else {
+          // اگر در حالت جستجو نیست، اجازه خروج از صفحه داده شود
+          Navigator.of(context).maybePop();
+        }
       },
-      child: Scaffold(
-        extendBodyBehindAppBar: true,
-        appBar: PreferredSize(
-          preferredSize: Size(width, 80),
-          child: Material(
-            color: Colors.lightBlue.withAlpha(110),
-            shape: const RoundedRectangleBorder(
-              borderRadius: BorderRadius.only(
-                  bottomLeft: Radius.circular(30),
-                  bottomRight: Radius.circular(30)),
-            ),
-            elevation: 4,
-            child: SizedBox(
-              height: 80,
-              child: Padding(
-                padding: const EdgeInsets.only(top: 15.0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    const Spacer(),
-                    SearchTextFieldWidget(
-                      searchController: searchController,
-                    ),
-                    const Spacer(),
-                    const NotificationButtonWidget(),
-                    const Spacer(),
-                  ],
+      child: GestureDetector(
+        onTap: () {
+          FocusScope.of(context).unfocus();
+          searchController.text = '';
+          BlocProvider.of<SearchBloc>(context).add(SearchQueryChanged(''));
+        },
+        child: Scaffold(
+          extendBodyBehindAppBar: true,
+          appBar: PreferredSize(
+            preferredSize: Size(width, 80),
+            child: Material(
+              color: Colors.lightBlue.withAlpha(110),
+              shape: const RoundedRectangleBorder(
+                borderRadius: BorderRadius.only(
+                    bottomLeft: Radius.circular(30),
+                    bottomRight: Radius.circular(30)),
+              ),
+              elevation: 4,
+              child: SizedBox(
+                height: 80,
+                child: Padding(
+                  padding: const EdgeInsets.only(top: 15.0),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const Spacer(),
+                      SearchTextFieldWidget(
+                        searchController: searchController,
+                      ),
+                      const Spacer(),
+                      const NotificationButtonWidget(),
+                      const Spacer(),
+                    ],
+                  ),
                 ),
               ),
             ),
           ),
-        ),
-        body: Container(
-          decoration: BoxDecoration(
-              gradient: LinearGradient(
-                  colors: Theme.of(context).brightness == Brightness.light
-                      ? [const Color.fromARGB(255, 155, 250, 183), Colors.white]
-                      : [
-                          const Color.fromARGB(255, 40, 15, 84),
-                          Colors.black,
-                        ]
-                  //       colors: [
-
-                  // ]
-                  )),
-          child: Stack(
-            children: [
-              IndexedStack(
-                index: 0,
-                children: [
-                  BlocBuilder<SearchBloc, SearchState>(
-                    builder: (context, state) {
-                      final crossFadeState = (state is SearchInitial)
-                          ? CrossFadeState.showFirst
-                          : CrossFadeState.showSecond;
-                      return ListView(
-                        children: [
-                          AnimatedCrossFade(
-                            firstCurve: Curves.easeInBack,
-                            secondCurve: Curves.easeInBack,
-                            duration: const Duration(milliseconds: 400),
-                            firstChild: Column(
-                              children: [
-                                const AdsBannerListWidget(),
-                                const SizedBox(
-                                  height: 10,
-                                ),
-                                SizedBox(
-                                  width: MediaQuery.of(context).size.width,
-                                  height: 40,
-                                  child: const Padding(
-                                    padding: EdgeInsets.only(left: 20.0),
-                                    child: Text(
-                                      textAlign: TextAlign.left,
-                                      'Discounted',
-                                      style: TextStyle(fontSize: 30),
+          body: Container(
+            decoration: BoxDecoration(
+                gradient: LinearGradient(
+                    colors: Theme.of(context).brightness == Brightness.light
+                        ? [
+                            const Color.fromARGB(255, 155, 250, 183),
+                            Colors.white
+                          ]
+                        : [
+                            const Color.fromARGB(255, 40, 15, 84),
+                            Colors.black,
+                          ])),
+            child: Stack(
+              children: [
+                IndexedStack(
+                  index: 0,
+                  children: [
+                    BlocBuilder<SearchBloc, SearchState>(
+                      builder: (context, state) {
+                        final crossFadeState = (state is SearchInitial ||
+                                state is SearchEndedState)
+                            ? CrossFadeState.showFirst
+                            : CrossFadeState.showSecond;
+                        return ListView(
+                          children: [
+                            AnimatedCrossFade(
+                              firstCurve: Curves.easeInBack,
+                              secondCurve: Curves.easeInBack,
+                              duration: const Duration(milliseconds: 400),
+                              firstChild: Column(
+                                children: [
+                                  const AdsBannerListWidget(),
+                                  const SizedBox(
+                                    height: 15,
+                                  ),
+                                  SizedBox(
+                                    width: MediaQuery.of(context).size.width,
+                                    height: 40,
+                                    child: const Padding(
+                                      padding: EdgeInsets.only(left: 20.0),
+                                      child: Text(
+                                        textAlign: TextAlign.left,
+                                        'Discounted',
+                                        style: TextStyle(fontSize: 30),
+                                      ),
                                     ),
                                   ),
-                                ),
-                                const SizedBox(height: 20),
-                                const DiscountedListWidget(),
-                                const SizedBox(
-                                  height: 20,
-                                ),
-                                SizedBox(
-                                  width: MediaQuery.of(context).size.width,
-                                  height: 40,
-                                  child: const Padding(
-                                    padding: EdgeInsets.only(left: 20.0),
-                                    child: Text(
-                                      textAlign: TextAlign.left,
-                                      'Categories',
-                                      style: TextStyle(fontSize: 30),
+                                  const SizedBox(height: 20),
+                                  const DiscountedListWidget(),
+                                  const SizedBox(
+                                    height: 20,
+                                  ),
+                                  SizedBox(
+                                    width: MediaQuery.of(context).size.width,
+                                    height: 40,
+                                    child: const Padding(
+                                      padding: EdgeInsets.only(left: 20.0),
+                                      child: Text(
+                                        textAlign: TextAlign.left,
+                                        'Categories',
+                                        style: TextStyle(fontSize: 30),
+                                      ),
                                     ),
                                   ),
-                                ),
-                                const SizedBox(
-                                  height: 25,
-                                ),
-                                const CategoriesWidget(),
-                                const Divider(
-                                  indent: 20,
-                                  endIndent: 20,
-                                  thickness: 1.5,
-                                ),
-                                const SizedBox(height: 20),
-                                SizedBox(
-                                  width: MediaQuery.of(context).size.width,
-                                  height: 40,
-                                  child: const Padding(
-                                    padding: EdgeInsets.only(left: 20.0),
-                                    child: Text(
-                                      textAlign: TextAlign.left,
-                                      'Top Sells',
-                                      style: TextStyle(fontSize: 30),
+                                  const SizedBox(
+                                    height: 25,
+                                  ),
+                                  const CategoriesWidget(),
+                                  const Divider(
+                                    indent: 20,
+                                    endIndent: 20,
+                                    thickness: 1.5,
+                                  ),
+                                  const SizedBox(height: 20),
+                                  SizedBox(
+                                    width: MediaQuery.of(context).size.width,
+                                    height: 40,
+                                    child: const Padding(
+                                      padding: EdgeInsets.only(left: 20.0),
+                                      child: Text(
+                                        textAlign: TextAlign.left,
+                                        'Top Sells',
+                                        style: TextStyle(fontSize: 30),
+                                      ),
                                     ),
                                   ),
-                                ),
-                                const SizedBox(
-                                  height: 10,
-                                ),
-                                const SizedBox(
-                                  height: 10,
-                                ),
-                                const TopSellsListWidget(),
-                                const SizedBox(height: 15),
-                              ],
-                            ),
-                            secondChild: Column(
-                              children: [
-                                if (state is SearchLoadedState)
-                                  ListView.builder(
-                                    shrinkWrap: true,
-                                    physics:
-                                        const NeverScrollableScrollPhysics(),
-                                    itemCount: state.products.length,
-                                    itemBuilder: (context, index) {
-                                      final result = state.products[index];
-                                      return Padding(
-                                        padding: const EdgeInsets.symmetric(
-                                            vertical: 12.0),
-                                        child: ListTile(
-                                          onTap: () {
-                                            context.push('/order',
-                                                extra: result.id);
-                                          },
-                                          title: SizedBox(
-                                            height: 20,
-                                            child: Text(
-                                              result.title,
-                                              style: const TextStyle(
-                                                  color: Colors.white),
+                                  const SizedBox(
+                                    height: 10,
+                                  ),
+                                  const SizedBox(
+                                    height: 10,
+                                  ),
+                                  const TopSellsListWidget(),
+                                  const SizedBox(height: 15),
+                                ],
+                              ),
+                              secondChild: Column(
+                                children: [
+                                  if (state is SearchLoadedState)
+                                    ListView.builder(
+                                      shrinkWrap: true,
+                                      physics:
+                                          const NeverScrollableScrollPhysics(),
+                                      itemCount: state.products.length,
+                                      itemBuilder: (context, index) {
+                                        final result = state.products[index];
+                                        return Padding(
+                                          padding: const EdgeInsets.symmetric(
+                                              vertical: 12.0),
+                                          child: ListTile(
+                                            onTap: () {
+                                              context.push('/order',
+                                                  extra: result.id);
+                                            },
+                                            title: SizedBox(
+                                              height: 20,
+                                              child: Text(
+                                                style: const TextStyle(
+                                                    fontSize: 15),
+                                                result.title.length >= 30
+                                                    ? "${result.title.substring(0, 27)}..."
+                                                    : result.title,
+                                              ),
                                             ),
-                                          ),
-                                          leading: ClipRRect(
-                                            borderRadius:
-                                                BorderRadius.circular(10),
-                                            child: RepaintBoundary(
-                                              child: CachedNetworkImage(
-                                                height: 50,
-                                                width: 50,
-                                                imageUrl: result.image,
-                                                fit: BoxFit.cover,
-                                                placeholder: (context, url) =>
-                                                    const Center(
-                                                        child: spinkit),
-                                                errorWidget:
-                                                    (context, url, error) =>
-                                                        const Icon(
-                                                  Icons.error,
-                                                  color: Colors.red,
+                                            leading: ClipRRect(
+                                              borderRadius:
+                                                  BorderRadius.circular(10),
+                                              child: RepaintBoundary(
+                                                child: CachedNetworkImage(
+                                                  height: 50,
+                                                  width: 50,
+                                                  imageUrl: result.image,
+                                                  fit: BoxFit.cover,
+                                                  placeholder: (context, url) =>
+                                                      const Center(
+                                                          child: spinkit),
+                                                  errorWidget:
+                                                      (context, url, error) =>
+                                                          const Icon(
+                                                    Icons.error,
+                                                    color: Colors.red,
+                                                  ),
                                                 ),
                                               ),
                                             ),
                                           ),
+                                        );
+                                      },
+                                    ),
+                                  if (state is SearchErrorState)
+                                    Center(
+                                      child: Padding(
+                                        padding: const EdgeInsets.all(20.0),
+                                        child: Text(
+                                          state.message,
+                                          style: const TextStyle(fontSize: 18),
                                         ),
-                                      );
-                                    },
-                                  ),
-                                if (state is SearchErrorState)
-                                  Center(
-                                    child: Padding(
-                                      padding: const EdgeInsets.all(8.0),
-                                      child: Text(
-                                        state.message,
-                                        style: const TextStyle(
-                                            color: Colors.white, fontSize: 20),
                                       ),
                                     ),
-                                  ),
-                                if (state is SearchLoadingState)
-                                  Column(
-                                    children: [
-                                      Padding(
-                                        padding: const EdgeInsets.all(8.0),
-                                        child: ListView(
-                                          shrinkWrap: true,
-                                          children: const [
-                                            Center(child: spinkit),
-                                          ],
+                                  if (state is SearchLoadingState)
+                                    Column(
+                                      children: [
+                                        Padding(
+                                          padding: const EdgeInsets.all(8.0),
+                                          child: ListView(
+                                            shrinkWrap: true,
+                                            children: const [
+                                              Center(child: spinkit),
+                                            ],
+                                          ),
                                         ),
-                                      ),
-                                    ],
-                                  )
-                              ],
+                                      ],
+                                    )
+                                ],
+                              ),
+                              crossFadeState: crossFadeState,
                             ),
-                            crossFadeState: crossFadeState,
-                          ),
-                        ],
-                      );
-                    },
-                  ),
-                ],
-              ),
-            ],
+                          ],
+                        );
+                      },
+                    ),
+                  ],
+                ),
+              ],
+            ),
           ),
         ),
       ),

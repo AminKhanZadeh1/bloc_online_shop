@@ -4,6 +4,7 @@ import 'package:bloc_online_shop/Features/Profile/Presentation/Widgets/Profile_S
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:iconly/iconly.dart';
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
@@ -37,14 +38,28 @@ class _ProfileScreenState extends State<ProfileScreen>
               const SizedBox(
                 height: 15,
               ),
-              BlocBuilder<ThemeCubit, ThemeData>(
-                builder: (context, theme) {
-                  return Switch(
-                      value: theme == darkMode,
-                      onChanged: (value) {
-                        context.read<ThemeCubit>().toggleTheme();
-                      });
-                },
+              Row(
+                spacing: 5,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Icon(
+                    Icons.light_mode,
+                    size: 30,
+                  ),
+                  BlocBuilder<ThemeCubit, ThemeData>(
+                    builder: (context, theme) {
+                      return Switch(
+                          value: theme == darkMode,
+                          onChanged: (value) {
+                            context.read<ThemeCubit>().toggleTheme();
+                          });
+                    },
+                  ),
+                  Icon(
+                    Icons.dark_mode_outlined,
+                    size: 30,
+                  )
+                ],
               )
             ],
           ),

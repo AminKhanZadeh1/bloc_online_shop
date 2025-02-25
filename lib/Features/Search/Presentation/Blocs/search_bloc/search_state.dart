@@ -18,3 +18,5 @@ class SearchErrorState extends SearchState {
 
   SearchErrorState({required this.message});
 }
+
+class SearchEndedState extends SearchState {}

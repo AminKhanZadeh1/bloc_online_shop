@@ -10,6 +10,7 @@ final ThemeData lightMode = ThemeData(
     bodyLarge: GoogleFonts.aladin(fontSize: 18, height: 1, color: GColor.black),
     bodySmall: GoogleFonts.aladin(fontSize: 13, height: 1, color: GColor.black),
   ),
+  cardColor: const Color.fromARGB(255, 200, 238, 255),
   colorScheme: const ColorScheme.light(
     primary: GColor.blue,
     onPrimary: GColor.black,
@@ -32,6 +33,7 @@ final ThemeData darkMode = ThemeData(
     bodySmall:
         GoogleFonts.aladin(fontSize: 13, height: 1, color: GColor.whiteText),
   ),
+  cardColor: Colors.grey.shade800,
   colorScheme: const ColorScheme.dark(
     primary: GColor.lightBlue,
     onPrimary: GColor.whiteText,

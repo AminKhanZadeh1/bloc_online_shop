@@ -38,6 +38,7 @@ class OrderScreen extends StatelessWidget {
     return Scaffold(
       extendBody: true,
       appBar: AppBar(
+        scrolledUnderElevation: 0,
         leading: IconButton(
           onPressed: () => context.pop(),
           icon: const Icon(IconlyBold.arrow_left),
@@ -65,13 +66,21 @@ class OrderScreen extends StatelessWidget {
       key: const PageStorageKey('orderScreenList'),
       padding: const EdgeInsets.all(16.0),
       children: [
-        CachedNetworkImage(
-          imageUrl: item.image,
-          placeholder: (context, url) => SpinKitFadingCircle(),
-          errorWidget: (context, url, error) => const Icon(Icons.error),
-          height: 400,
-          width: double.maxFinite < 200 ? double.maxFinite : 200,
-          fit: BoxFit.fill,
+        Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: SizedBox(
+            height: 300,
+            width: 200,
+            child: ClipRRect(
+              borderRadius: BorderRadius.all(Radius.circular(20)),
+              child: CachedNetworkImage(
+                imageUrl: item.image,
+                placeholder: (context, url) => SpinKitFadingCircle(),
+                errorWidget: (context, url, error) => const Icon(Icons.error),
+                fit: BoxFit.fill,
+              ),
+            ),
+          ),
         ),
         Text(
           item.title,
@@ -119,7 +128,9 @@ class OrderScreen extends StatelessWidget {
         padding: const EdgeInsets.symmetric(horizontal: 16),
         height: 65,
         decoration: BoxDecoration(
-          color: Colors.white,
+          color: Theme.of(context).brightness == Brightness.light
+              ? const Color.fromARGB(255, 168, 216, 255)
+              : Colors.deepPurple,
           borderRadius: BorderRadius.circular(50),
         ),
         child: Row(
@@ -129,7 +140,10 @@ class OrderScreen extends StatelessWidget {
               onPressed: () => _updateCartQuantity(context, cartItem, -1),
               icon: Icon(cartItem.quantity == 1 ? Icons.delete : Icons.remove),
             ),
-            Text(cartItem.quantity.toString()),
+            Text(
+              cartItem.quantity.toString(),
+              style: TextStyle(fontSize: 18),
+            ),
             IconButton(
               onPressed: () => _updateCartQuantity(context, cartItem, 1),
               icon: const Icon(Icons.add),
@@ -146,10 +160,15 @@ class OrderScreen extends StatelessWidget {
       child: SizedBox(
         height: 65,
         child: ElevatedButton(
-          style: const ButtonStyle(
-              elevation: WidgetStatePropertyAll(10),
-              backgroundColor: WidgetStatePropertyAll(GColor.white),
-              foregroundColor: WidgetStatePropertyAll(GColor.black)),
+          style: ButtonStyle(
+              backgroundColor: WidgetStatePropertyAll(
+                  Theme.of(context).brightness == Brightness.light
+                      ? const Color.fromARGB(255, 168, 216, 255)
+                      : Colors.deepPurple),
+              foregroundColor: WidgetStatePropertyAll(
+                  Theme.of(context).brightness == Brightness.light
+                      ? GColor.black
+                      : GColor.white)),
           onPressed: () {
             final order = OrderEntity(
               userId: UserAuth.userId,
