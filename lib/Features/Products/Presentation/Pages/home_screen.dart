@@ -35,12 +35,10 @@ class _HomeScreenState extends State<HomeScreen>
       canPop: false,
       onPopInvoked: (didPop) {
         if (searchController.text.isNotEmpty) {
-          // اگر کاربر در حالت جستجو است، خروج را لغو کرده و فیلد جستجو را خالی کنیم
           FocusScope.of(context).unfocus();
           searchController.clear();
           BlocProvider.of<SearchBloc>(context).add(SearchQueryChanged(''));
         } else {
-          // اگر در حالت جستجو نیست، اجازه خروج از صفحه داده شود
           Navigator.of(context).maybePop();
         }
       },
