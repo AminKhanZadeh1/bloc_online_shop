@@ -61,7 +61,7 @@ class _SignUpScreenState extends State<SignUpScreen>
         children: [
           Form(
               key: _formKey,
-              child: Column(children: [
+              child: Column(spacing: 10, children: [
                 SizedBox(
                   width: width * 0.9,
                   height: 80,
@@ -73,7 +73,10 @@ class _SignUpScreenState extends State<SignUpScreen>
                     prefixIcon: const Padding(
                       padding:
                           EdgeInsets.symmetric(horizontal: 15, vertical: 10),
-                      child: Icon(CupertinoIcons.person_fill),
+                      child: Icon(
+                        CupertinoIcons.person_fill,
+                        color: Colors.black,
+                      ),
                     ),
                     errorMsg: widget.errorMsg,
                     validator: (val) {
@@ -95,7 +98,10 @@ class _SignUpScreenState extends State<SignUpScreen>
                     prefixIcon: const Padding(
                       padding:
                           EdgeInsets.symmetric(horizontal: 15, vertical: 10),
-                      child: Icon(CupertinoIcons.mail_solid),
+                      child: Icon(
+                        CupertinoIcons.mail_solid,
+                        color: Colors.black,
+                      ),
                     ),
                     errorMsg: widget.errorMsg,
                     validator: (val) {
@@ -123,7 +129,10 @@ class _SignUpScreenState extends State<SignUpScreen>
                         prefixIcon: const Padding(
                           padding: EdgeInsets.symmetric(
                               horizontal: 15, vertical: 10),
-                          child: Icon(CupertinoIcons.lock_fill),
+                          child: Icon(
+                            CupertinoIcons.lock_fill,
+                            color: Colors.black,
+                          ),
                         ),
                         errorMsg: widget.errorMsg,
                         validator: (val) {
@@ -165,7 +174,10 @@ class _SignUpScreenState extends State<SignUpScreen>
                     prefixIcon: const Padding(
                       padding:
                           EdgeInsets.symmetric(horizontal: 15, vertical: 10),
-                      child: Icon(CupertinoIcons.lock_shield_fill),
+                      child: Icon(
+                        CupertinoIcons.lock_shield_fill,
+                        color: Colors.black,
+                      ),
                     ),
                     errorMsg: widget.errorMsg,
                     validator: (val) {
@@ -209,14 +221,10 @@ class _SignUpScreenState extends State<SignUpScreen>
                                 ? loadingSpinkit
                                 : const SizedBox(
                                     height: 25,
-                                    width: 70,
+                                    width: 90,
                                     child: Center(
                                       child: Text(
                                         'Sign Up',
-                                        style: TextStyle(
-                                            color: Colors.white,
-                                            fontWeight: FontWeight.bold,
-                                            fontSize: 18),
                                       ),
                                     ),
                                   ),

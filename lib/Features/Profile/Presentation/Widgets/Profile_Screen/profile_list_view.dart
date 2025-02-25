@@ -20,9 +20,7 @@ class ProfileListView extends StatelessWidget {
         const SizedBox(
           height: 15,
         ),
-        const Divider(
-          color: Colors.white,
-        ),
+        const Divider(),
         const SizedBox(
           height: 15,
         ),

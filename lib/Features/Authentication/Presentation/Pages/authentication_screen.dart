@@ -26,32 +26,31 @@ class _AuthenticationScreenState extends State<AuthenticationScreen>
 
   @override
   Widget build(BuildContext context) {
-    ColorScheme themeData = Theme.of(context).colorScheme;
     var height = MediaQuery.of(context).size.height;
     var width = MediaQuery.of(context).size.width;
     return Scaffold(
       resizeToAvoidBottomInset: false,
-      backgroundColor: Colors.black,
-      appBar: AppBar(
-        backgroundColor: themeData.primary,
-        foregroundColor: Colors.white,
-        centerTitle: true,
-        title: const Text('Welcome'),
-      ),
+      backgroundColor: Theme.of(context).brightness == Brightness.light
+          ? Colors.white
+          : Colors.black,
       body: Stack(
         children: [
-          Align(
-            alignment: const AlignmentDirectional(-2, -1.2),
-            child: Container(
-              height: height,
-              width: width / 1.3,
-              decoration: const BoxDecoration(
-                shape: BoxShape.circle,
+          Padding(
+            padding: const EdgeInsets.only(top: 120.0),
+            child: Align(
+              alignment: Alignment.bottomLeft,
+              child: Container(
+                height: height,
+                width: width / 1.3,
+                decoration: const BoxDecoration(
+                  shape: BoxShape.circle,
+                  color: Color.fromARGB(255, 255, 143, 181),
+                ),
               ),
             ),
           ),
           Align(
-            alignment: const AlignmentDirectional(2, -1.2),
+            alignment: Alignment.bottomRight,
             child: Container(
               height: height,
               width: width / 1.3,
@@ -65,7 +64,7 @@ class _AuthenticationScreenState extends State<AuthenticationScreen>
               filter: ImageFilter.blur(sigmaX: 100, sigmaY: 100),
               child: Container()),
           Padding(
-            padding: const EdgeInsets.only(top: 60),
+            padding: const EdgeInsets.only(top: 100),
             child: Align(
                 alignment: Alignment.topCenter,
                 child: Column(
@@ -75,20 +74,23 @@ class _AuthenticationScreenState extends State<AuthenticationScreen>
                       child: TabBar(
                         controller: tabController,
                         unselectedLabelColor: Colors.grey[600],
-                        labelColor: Colors.white,
+                        labelColor:
+                            Theme.of(context).brightness == Brightness.light
+                                ? Colors.black
+                                : Colors.white,
                         tabs: const [
                           Padding(
                             padding: EdgeInsets.all(12),
                             child: Text(
                               'Login',
-                              style: TextStyle(fontSize: 20),
+                              style: TextStyle(fontSize: 18),
                             ),
                           ),
                           Padding(
                             padding: EdgeInsets.all(12),
                             child: Text(
                               'Sign Up',
-                              style: TextStyle(fontSize: 20),
+                              style: TextStyle(fontSize: 18),
                             ),
                           ),
                         ],

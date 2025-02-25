@@ -55,6 +55,7 @@ dependencies:
   cached_network_image: ^3.4.1
   fluttertoast: ^8.2.10
   lucide_icons_flutter: ^1.2.7
+  smooth_page_indicator: ^1.2.1
 
 dev_dependencies:
   flutter_test:

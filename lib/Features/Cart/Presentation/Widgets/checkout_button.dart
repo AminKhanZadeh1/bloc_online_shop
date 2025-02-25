@@ -1,3 +1,4 @@
+import 'package:bloc_online_shop/Config/Theme/Colors/g_color.dart';
 import 'package:flutter/material.dart';
 
 class CheckoutButton extends StatelessWidget {
@@ -8,44 +9,50 @@ class CheckoutButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return ElevatedButton(
       style: const ButtonStyle(
-        backgroundColor: WidgetStatePropertyAll(Colors.green),
-        foregroundColor: WidgetStatePropertyAll(Colors.white),
-      ),
+          side:
+              WidgetStatePropertyAll(BorderSide(color: GColor.white, width: 2)),
+          backgroundColor: WidgetStatePropertyAll(Colors.green),
+          foregroundColor: WidgetStatePropertyAll(Colors.white),
+          elevation: WidgetStatePropertyAll(5)),
       onPressed: () {},
       child: SizedBox(
         height: 60,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Container(
-                height: 25,
-                width: 100,
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(5),
-                    color: Colors.white),
-                child: Center(
-                    child: Text(
-                  "\$${total.toStringAsFixed(2)}",
-                  style: const TextStyle(color: Colors.green),
-                ))),
             const SizedBox(
               height: 3,
             ),
-            const Row(
+            Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Text(
+                const Text(
                   'Checkout',
                   style: TextStyle(fontSize: 16),
                 ),
-                SizedBox(
-                  width: 3,
+                const SizedBox(
+                  width: 10,
                 ),
-                Icon(
+                Container(
+                    margin: const EdgeInsets.only(top: 6),
+                    height: 50,
+                    width: 100,
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(5),
+                        color: Colors.white),
+                    child: Center(
+                        child: Text(
+                      "\$${total.toStringAsFixed(2)}",
+                      style: const TextStyle(color: Colors.green),
+                    ))),
+                const SizedBox(
+                  width: 5,
+                ),
+                const Icon(
                   Icons.payment_rounded,
                   color: Colors.white,
-                  size: 18,
-                )
+                  size: 30,
+                ),
               ],
             ),
           ],
