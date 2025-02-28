@@ -56,7 +56,6 @@ class Routes {
       path: orderPage,
       builder: (context, state) {
         final productId = state.extra as int;
-
         return BlocProvider<OrderBloc>(
           create: (context) => OrderBloc(locator(), locator()),
           child: OrderScreen(

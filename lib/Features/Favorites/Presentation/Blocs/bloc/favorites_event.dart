@@ -17,4 +17,7 @@ class RemoveFromFavsEvent extends FavoritesEvent {
   final int productId;
 
   const RemoveFromFavsEvent({required this.productId});
+
+  @override
+  List<Object> get props => [productId];
 }

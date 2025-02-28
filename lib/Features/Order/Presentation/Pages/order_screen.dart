@@ -38,12 +38,7 @@ class OrderScreen extends StatelessWidget {
             category: 'category',
             image: 'image',
             rating: Rating(rate: 0, count: 0));
-    final state = BlocProvider.of<FavoritesBloc>(context).state;
-    final favItem = state is FavsLoadedState
-        ? state.favProducts.firstWhere(
-            (element) => element!.productId == productId,
-          )
-        : null;
+
     return Scaffold(
       extendBody: true,
       appBar: AppBar(
@@ -53,7 +48,7 @@ class OrderScreen extends StatelessWidget {
           icon: const Icon(IconlyBold.arrow_left),
         ),
       ),
-      body: _buildBody(context, item, favItem),
+      body: _buildBody(context, item),
       bottomNavigationBar: _buildBottomNavigationBar(
           context,
           OrderEntity(
@@ -66,12 +61,11 @@ class OrderScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildBody(BuildContext context, ProductEntity item, favItem) {
-    return _buildProductDetails(context, item, favItem);
+  Widget _buildBody(BuildContext context, ProductEntity item) {
+    return _buildProductDetails(context, item);
   }
 
-  Widget _buildProductDetails(
-      BuildContext context, ProductEntity item, favItem) {
+  Widget _buildProductDetails(BuildContext context, ProductEntity item) {
     return ListView(
       key: const PageStorageKey('orderScreenList'),
       padding: const EdgeInsets.all(16.0),
@@ -108,29 +102,42 @@ class OrderScreen extends StatelessWidget {
         const SizedBox(
           height: 20,
         ),
-        IconButton(
-          onPressed: () {
-            if (favItem == null) {
-              BlocProvider.of<OrderBloc>(context).add(AddToFavsEvent(FavEntity(
-                  userId: UserAuth.userId,
-                  productId: item.id,
-                  productName: item.title,
-                  image: item.image,
-                  price: item.price.toString())));
-            } else {
-              BlocProvider.of<FavoritesBloc>(context)
-                  .add(RemoveFromFavsEvent(productId: productId));
+        BlocBuilder<FavoritesBloc, FavoritesState>(
+          builder: (context, state) {
+            FavEntity empty = const FavEntity(
+                userId: '',
+                productId: 0,
+                productName: '',
+                image: '',
+                price: '');
+            if (state is FavsLoadedState) {
+              FavEntity? favItem = state.favProducts.firstWhere(
+                  (element) => element!.productId == productId,
+                  orElse: () => empty);
+              return IconButton(
+                  onPressed: () {
+                    if (favItem.productName == '') {
+                      BlocProvider.of<OrderBloc>(context).add(AddToFavsEvent(
+                          FavEntity(
+                              userId: UserAuth.userId,
+                              productId: item.id,
+                              productName: item.title,
+                              image: item.image,
+                              price: item.price.toString())));
+                    } else {
+                      BlocProvider.of<FavoritesBloc>(context)
+                          .add(RemoveFromFavsEvent(productId: productId));
+                    }
+                  },
+                  icon: Icon(
+                    favItem!.productName == ''
+                        ? Icons.favorite_border_rounded
+                        : Icons.favorite_rounded,
+                    color: Colors.red,
+                  ));
             }
+            return const SizedBox.shrink();
           },
-          icon: favItem == null
-              ? const Icon(
-                  Icons.favorite_border_rounded,
-                  color: Colors.red,
-                )
-              : const Icon(
-                  Icons.favorite_rounded,
-                  color: Colors.red,
-                ),
         ),
         RatingBarIndicator(
           rating: item.rating.rate,
