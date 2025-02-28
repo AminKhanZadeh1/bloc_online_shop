@@ -62,8 +62,11 @@ class DiscountedListWidget extends StatelessWidget {
                                 width: double.infinity,
                                 imageUrl: product.image,
                                 fit: BoxFit.cover,
-                                placeholder: (context, url) =>
-                                    const Center(child: spinkit),
+                                placeholder: (context, url) => Center(
+                                    child: Theme.of(context).brightness ==
+                                            Brightness.light
+                                        ? blackSpinkit
+                                        : whiteSpinkit),
                                 errorWidget: (context, url, error) =>
                                     const Icon(
                                   Icons.error,
@@ -240,7 +243,10 @@ class DiscountedListWidget extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(state.message,
-                    style: const TextStyle(color: Colors.white)),
+                    style: TextStyle(
+                        color: Theme.of(context).brightness == Brightness.light
+                            ? Colors.black
+                            : Colors.white)),
                 const SizedBox(
                   height: 20,
                 ),
@@ -253,7 +259,10 @@ class DiscountedListWidget extends StatelessWidget {
               ],
             );
           }
-          return const Center(child: spinkit);
+          return Center(
+              child: Theme.of(context).brightness == Brightness.light
+                  ? blackSpinkit
+                  : whiteSpinkit);
         },
       ),
     );

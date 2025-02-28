@@ -3,6 +3,7 @@ import 'package:bloc_online_shop/Config/Theme/spinkit.dart';
 import 'package:bloc_online_shop/Core/Utils/UserAuth_Check/user_auth.dart';
 import 'package:bloc_online_shop/Features/Cart/Presentation/Blocs/cart_bloc/bloc/cart_bloc.dart';
 import 'package:bloc_online_shop/Features/Favorites/Domain/Entities/fav_entity.dart';
+import 'package:bloc_online_shop/Features/Favorites/Presentation/Blocs/bloc/favorites_bloc.dart';
 import 'package:bloc_online_shop/Features/Shared/Models/rating_model.dart';
 import 'package:bloc_online_shop/Features/Order/Presentation/Blocs/order_bloc/bloc/order_bloc.dart';
 import 'package:bloc_online_shop/Features/Products/Presentation/blocs/product_bloc/bloc/product_bloc.dart';
@@ -37,6 +38,7 @@ class OrderScreen extends StatelessWidget {
             category: 'category',
             image: 'image',
             rating: Rating(rate: 0, count: 0));
+
     return Scaffold(
       extendBody: true,
       appBar: AppBar(
@@ -100,15 +102,43 @@ class OrderScreen extends StatelessWidget {
         const SizedBox(
           height: 20,
         ),
-        IconButton(
-            onPressed: () => BlocProvider.of<OrderBloc>(context).add(
-                AddToFavsEvent(FavEntity(
-                    userId: UserAuth.userId,
-                    productId: item.id,
-                    productName: item.title,
-                    image: item.image,
-                    price: item.price.toString()))),
-            icon: const Icon(IconlyBold.heart)),
+        BlocBuilder<FavoritesBloc, FavoritesState>(
+          builder: (context, state) {
+            FavEntity empty = const FavEntity(
+                userId: '',
+                productId: 0,
+                productName: '',
+                image: '',
+                price: '');
+            if (state is FavsLoadedState) {
+              FavEntity? favItem = state.favProducts.firstWhere(
+                  (element) => element!.productId == productId,
+                  orElse: () => empty);
+              return IconButton(
+                  onPressed: () {
+                    if (favItem.productName == '') {
+                      BlocProvider.of<OrderBloc>(context).add(AddToFavsEvent(
+                          FavEntity(
+                              userId: UserAuth.userId,
+                              productId: item.id,
+                              productName: item.title,
+                              image: item.image,
+                              price: item.price.toString())));
+                    } else {
+                      BlocProvider.of<FavoritesBloc>(context)
+                          .add(RemoveFromFavsEvent(productId: productId));
+                    }
+                  },
+                  icon: Icon(
+                    favItem!.productName == ''
+                        ? Icons.favorite_border_rounded
+                        : Icons.favorite_rounded,
+                    color: Colors.red,
+                  ));
+            }
+            return const SizedBox.shrink();
+          },
+        ),
         RatingBarIndicator(
           rating: item.rating.rate,
           itemBuilder: (context, index) =>
@@ -135,7 +165,10 @@ class OrderScreen extends StatelessWidget {
           return _buildAddToCartButton(context, cartItem!);
         }
         if (state is CartLoadingState) {
-          return const Center(child: spinkit);
+          return Center(
+              child: Theme.of(context).brightness == Brightness.light
+                  ? blackSpinkit
+                  : whiteSpinkit);
         }
         return const SizedBox.shrink();
       },

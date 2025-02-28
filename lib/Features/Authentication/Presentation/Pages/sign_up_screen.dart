@@ -218,7 +218,7 @@ class _SignUpScreenState extends State<SignUpScreen>
                             padding: const EdgeInsets.symmetric(
                                 horizontal: 10, vertical: 15),
                             child: state is SignUpProcess
-                                ? loadingSpinkit
+                                ? whiteLoadingSpinkit
                                 : const SizedBox(
                                     height: 25,
                                     width: 90,

@@ -5,6 +5,7 @@ import 'package:bloc_online_shop/Core/Utils/Routes/routes.dart';
 import 'package:bloc_online_shop/Features/Authentication/Presentation/Blocs/authentication_bloc/bloc/authentication_bloc.dart';
 import 'package:bloc_online_shop/Features/Authentication/Presentation/Blocs/login_bloc/bloc/login_bloc.dart';
 import 'package:bloc_online_shop/Features/Cart/Presentation/Blocs/cart_bloc/bloc/cart_bloc.dart';
+import 'package:bloc_online_shop/Features/Favorites/Presentation/Blocs/bloc/favorites_bloc.dart';
 import 'package:bloc_online_shop/Features/Products/Presentation/blocs/product_bloc/bloc/product_bloc.dart';
 import 'package:bloc_online_shop/firebase_options.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -32,6 +33,9 @@ void main() async {
       BlocProvider<LoginBloc>(create: (context) => LoginBloc(locator())),
       BlocProvider<CartBloc>(
         create: (context) => CartBloc(locator()),
+      ),
+      BlocProvider(
+        create: (context) => FavoritesBloc(locator()),
       ),
       BlocProvider<ProductBloc>(
         create: (context) => ProductBloc(locator()),
