@@ -34,7 +34,10 @@ class CartItemsList extends StatelessWidget {
                     return Container(
                         height: 85,
                         decoration: BoxDecoration(
-                            border: Border.all(color: Colors.black),
+                            border: Border.all(
+                                color: state.brightness == Brightness.light
+                                    ? Colors.black
+                                    : Colors.white),
                             color: state.brightness == Brightness.light
                                 ? Colors.white70
                                 : Colors.grey.shade800,
@@ -82,7 +85,7 @@ class CartItemsList extends StatelessWidget {
                   left: 8,
                   child: SizedBox(
                     height: 140,
-                    width: 100,
+                    width: 120,
                     child: ClipRRect(
                       borderRadius: BorderRadius.circular(20),
                       child: CachedNetworkImage(

@@ -22,7 +22,6 @@ class _CartScreenState extends State<CartScreen>
         if (state.cartItems.isEmpty) {
           return const Scaffold(
             extendBody: true,
-            backgroundColor: Colors.white,
             body: Center(
               child: Padding(
                 padding: EdgeInsets.all(8.0),
@@ -57,7 +56,6 @@ class _CartScreenState extends State<CartScreen>
           body: Center(
               child: Text(
             state.error,
-            style: const TextStyle(color: Colors.white),
           )),
         );
       }
@@ -65,7 +63,6 @@ class _CartScreenState extends State<CartScreen>
         body: Center(
           child: Text(
             'Unknown Error',
-            style: TextStyle(color: Colors.black),
           ),
         ),
       );

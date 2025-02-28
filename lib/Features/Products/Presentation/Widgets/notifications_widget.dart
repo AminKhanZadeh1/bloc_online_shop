@@ -33,22 +33,21 @@ class NotificationButton extends StatelessWidget {
   void _showOverlay(BuildContext context) {
     final cubit = context.read<NotificationCubit>();
 
-    // ایجاد OverlayEntry
     _overlayEntry = OverlayEntry(
       builder: (context) {
         return GestureDetector(
           onTap: () {
-            _removeOverlay(); // بستن Overlay هنگام ضربه روی صفحه
-            cubit.toggleNotificationPanel(); // تغییر وضعیت Cubit
+            _removeOverlay();
+            cubit.toggleNotificationPanel();
           },
-          behavior: HitTestBehavior.opaque, // امکان تشخیص ضربه روی کل صفحه
+          behavior: HitTestBehavior.opaque,
           child: Stack(
             children: [
               Positioned(
                 right: 16,
                 top: 80,
                 child: GestureDetector(
-                  onTap: () {}, // جلوگیری از بسته شدن هنگام ضربه داخل ویجت
+                  onTap: () {},
                   child: ValueListenableBuilder<double>(
                     valueListenable: _opacityNotifier,
                     builder: (context, opacity, _) {
@@ -92,19 +91,16 @@ class NotificationButton extends StatelessWidget {
       },
     );
 
-    // اضافه کردن OverlayEntry
     Overlay.of(context).insert(_overlayEntry!);
 
-    // تغییر مقدار opacity برای اجرای انیمیشن
     Future.delayed(const Duration(milliseconds: 10), () {
       _opacityNotifier.value = 1.0;
     });
   }
 
   void _removeOverlay() {
-    // حذف OverlayEntry
     if (_overlayEntry != null) {
-      _opacityNotifier.value = 0.0; // کاهش opacity قبل از حذف
+      _opacityNotifier.value = 0.0;
       Future.delayed(const Duration(milliseconds: 150), () {
         _overlayEntry?.remove();
         _overlayEntry = null;

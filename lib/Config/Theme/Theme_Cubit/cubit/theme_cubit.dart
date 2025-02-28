@@ -8,7 +8,6 @@ class ThemeCubit extends Cubit<ThemeData> {
     _loadTheme();
   }
 
-  /// تغییر تم و ذخیره در SharedPreferences
   Future<void> toggleTheme() async {
     final isDarkMode = state == darkMode;
     final newTheme = isDarkMode ? lightMode : darkMode;
@@ -18,7 +17,6 @@ class ThemeCubit extends Cubit<ThemeData> {
     await prefs.setBool('isDark', !isDarkMode);
   }
 
-  /// بارگذاری تم ذخیره‌شده از SharedPreferences
   Future<void> _loadTheme() async {
     final prefs = await SharedPreferences.getInstance();
     final isDark = prefs.getBool('isDark') ?? false;

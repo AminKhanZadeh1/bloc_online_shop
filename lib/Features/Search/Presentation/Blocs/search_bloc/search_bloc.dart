@@ -17,6 +17,7 @@ class SearchBloc extends Bloc<SearchEvent, SearchState> {
         allProducts = await GetResultsUseCase(searchRepo).call(null);
       }
       if (event.query.isEmpty) {
+        emit(SearchEndedState());
         return;
       }
       emit(SearchLoadingState());
@@ -31,13 +32,12 @@ class SearchBloc extends Bloc<SearchEvent, SearchState> {
       if (filteredProducts.isEmpty) {
         emit(SearchErrorState(message: "No Items found"));
         previousQuery = event.query;
+        if (event.query.contains(previousQuery ?? '')) {
+          emit(SearchErrorState(message: "No Items found"));
+        }
       } else {
         await Future.delayed(const Duration(milliseconds: 500));
         emit(SearchLoadedState(products: filteredProducts));
-        if (event.query.isEmpty) {
-          emit(SearchEndedState());
-          return;
-        }
       }
     });
     on<SearchFinishedEvent>(

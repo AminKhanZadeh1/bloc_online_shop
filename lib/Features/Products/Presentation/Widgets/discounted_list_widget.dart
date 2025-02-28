@@ -41,7 +41,7 @@ class DiscountedListWidget extends StatelessWidget {
                   onTap: () {
                     context.push(
                       '/order',
-                      extra: product.id, // ارسال مدل
+                      extra: product.id,
                     );
                   },
                   child: BlocBuilder<ThemeCubit, ThemeData>(
@@ -217,11 +217,6 @@ class DiscountedListWidget extends StatelessWidget {
                             SizedBox(
                               height: 25,
                               width: double.infinity,
-                              // decoration: BoxDecoration(
-                              //     color: Colors.grey,
-                              //     borderRadius: BorderRadius.only(
-                              //         bottomLeft: Radius.circular(20),
-                              //         bottomRight: Radius.circular(20))),
                               child: Center(
                                 child: Text(
                                   textAlign: TextAlign.center,

@@ -1,3 +1,5 @@
+// ignore_for_file: deprecated_member_use
+
 import 'package:bloc_online_shop/Config/Theme/spinkit.dart';
 import 'package:bloc_online_shop/Features/Products/Presentation/Widgets/ads_banner_list_widget.dart';
 import 'package:bloc_online_shop/Features/Products/Presentation/Widgets/categories_widget.dart';
@@ -37,8 +39,9 @@ class _HomeScreenState extends State<HomeScreen>
         if (searchController.text.isNotEmpty) {
           FocusScope.of(context).unfocus();
           searchController.clear();
-          BlocProvider.of<SearchBloc>(context).add(SearchQueryChanged(''));
+          BlocProvider.of<SearchBloc>(context).add(SearchFinishedEvent());
         } else {
+          BlocProvider.of<SearchBloc>(context).add(SearchFinishedEvent());
           Navigator.of(context).maybePop();
         }
       },
@@ -128,7 +131,7 @@ class _HomeScreenState extends State<HomeScreen>
                                       ),
                                     ),
                                   ),
-                                  const SizedBox(height: 20),
+                                  const SizedBox(height: 15),
                                   const DiscountedListWidget(),
                                   const SizedBox(
                                     height: 20,
@@ -146,7 +149,7 @@ class _HomeScreenState extends State<HomeScreen>
                                     ),
                                   ),
                                   const SizedBox(
-                                    height: 25,
+                                    height: 15,
                                   ),
                                   const CategoriesWidget(),
                                   const Divider(
@@ -236,7 +239,13 @@ class _HomeScreenState extends State<HomeScreen>
                                         padding: const EdgeInsets.all(20.0),
                                         child: Text(
                                           state.message,
-                                          style: const TextStyle(fontSize: 18),
+                                          style: TextStyle(
+                                              fontSize: 18,
+                                              color: Theme.of(context)
+                                                          .brightness ==
+                                                      Brightness.light
+                                                  ? Colors.black
+                                                  : Colors.white),
                                         ),
                                       ),
                                     ),

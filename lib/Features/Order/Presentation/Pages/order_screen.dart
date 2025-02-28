@@ -11,8 +11,10 @@ import 'package:bloc_online_shop/Features/Products/Domain/Entities/product_entit
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:go_router/go_router.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:iconly/iconly.dart';
 
 class OrderScreen extends StatelessWidget {
@@ -72,7 +74,7 @@ class OrderScreen extends StatelessWidget {
             height: 300,
             width: 200,
             child: ClipRRect(
-              borderRadius: BorderRadius.all(Radius.circular(20)),
+              borderRadius: const BorderRadius.all(Radius.circular(20)),
               child: CachedNetworkImage(
                 imageUrl: item.image,
                 placeholder: (context, url) => SpinKitFadingCircle(),
@@ -82,11 +84,22 @@ class OrderScreen extends StatelessWidget {
             ),
           ),
         ),
+        const SizedBox(
+          height: 20,
+        ),
         Text(
+          textAlign: TextAlign.center,
           item.title,
+          style: const TextStyle(fontSize: 20),
         ),
         const SizedBox(height: 30),
-        Text(item.description),
+        Text(
+          item.description,
+          textAlign: TextAlign.center,
+        ),
+        const SizedBox(
+          height: 20,
+        ),
         IconButton(
             onPressed: () => BlocProvider.of<OrderBloc>(context).add(
                 AddToFavsEvent(FavEntity(
@@ -95,7 +108,15 @@ class OrderScreen extends StatelessWidget {
                     productName: item.title,
                     image: item.image,
                     price: item.price.toString()))),
-            icon: const Icon(IconlyBold.heart))
+            icon: const Icon(IconlyBold.heart)),
+        RatingBarIndicator(
+          rating: item.rating.rate,
+          itemBuilder: (context, index) =>
+              const Icon(Icons.star, color: Colors.amber),
+          itemCount: 5,
+          itemSize: 24.0,
+          direction: Axis.horizontal,
+        )
       ],
     );
   }
@@ -128,8 +149,11 @@ class OrderScreen extends StatelessWidget {
         padding: const EdgeInsets.symmetric(horizontal: 16),
         height: 65,
         decoration: BoxDecoration(
+          border: Theme.of(context).brightness == Brightness.dark
+              ? Border.all(width: 2, color: Colors.white)
+              : null,
           color: Theme.of(context).brightness == Brightness.light
-              ? const Color.fromARGB(255, 168, 216, 255)
+              ? const Color.fromARGB(255, 218, 238, 255)
               : Colors.deepPurple,
           borderRadius: BorderRadius.circular(50),
         ),
@@ -142,7 +166,7 @@ class OrderScreen extends StatelessWidget {
             ),
             Text(
               cartItem.quantity.toString(),
-              style: TextStyle(fontSize: 18),
+              style: const TextStyle(fontSize: 18),
             ),
             IconButton(
               onPressed: () => _updateCartQuantity(context, cartItem, 1),
@@ -161,9 +185,14 @@ class OrderScreen extends StatelessWidget {
         height: 65,
         child: ElevatedButton(
           style: ButtonStyle(
+              side: WidgetStatePropertyAll(
+                Theme.of(context).brightness == Brightness.dark
+                    ? const BorderSide(width: 2, color: Colors.white)
+                    : null,
+              ),
               backgroundColor: WidgetStatePropertyAll(
                   Theme.of(context).brightness == Brightness.light
-                      ? const Color.fromARGB(255, 168, 216, 255)
+                      ? const Color.fromARGB(255, 218, 238, 255)
                       : Colors.deepPurple),
               foregroundColor: WidgetStatePropertyAll(
                   Theme.of(context).brightness == Brightness.light
@@ -180,7 +209,10 @@ class OrderScreen extends StatelessWidget {
             );
             context.read<OrderBloc>().add(AddToCartEvent(order));
           },
-          child: const Text('Add To Cart'),
+          child: Text(
+            'Add To Cart',
+            style: GoogleFonts.aladin(fontSize: 18),
+          ),
         ),
       ),
     );
