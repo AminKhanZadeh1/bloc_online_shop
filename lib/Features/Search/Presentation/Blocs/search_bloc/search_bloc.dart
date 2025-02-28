@@ -19,11 +19,6 @@ class SearchBloc extends Bloc<SearchEvent, SearchState> {
       if (event.query.isEmpty) {
         return;
       }
-
-      if (event.query.contains(previousQuery ?? '')) {
-        emit(SearchErrorState(message: "No Items found"));
-      }
-
       emit(SearchLoadingState());
 
       final query = event.query;
