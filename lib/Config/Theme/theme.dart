@@ -6,12 +6,11 @@ final ThemeData lightMode = ThemeData(
   brightness: Brightness.light,
   textTheme: TextTheme(
     bodyMedium:
-        GoogleFonts.aladin(fontSize: 15, height: 1.3, color: GColor.black),
-    bodyLarge:
-        GoogleFonts.aladin(fontSize: 18, height: 1.3, color: GColor.black),
-    bodySmall:
-        GoogleFonts.aladin(fontSize: 13, height: 1.3, color: GColor.black),
+        GoogleFonts.aladin(fontSize: 13, height: 1, color: GColor.black),
+    bodyLarge: GoogleFonts.aladin(fontSize: 18, height: 1, color: GColor.black),
+    bodySmall: GoogleFonts.aladin(fontSize: 13, height: 1, color: GColor.black),
   ),
+  cardColor: const Color.fromARGB(255, 200, 238, 255),
   colorScheme: const ColorScheme.light(
     primary: GColor.blue,
     onPrimary: GColor.black,
@@ -28,12 +27,13 @@ final ThemeData darkMode = ThemeData(
   brightness: Brightness.dark,
   textTheme: TextTheme(
     bodyMedium:
-        GoogleFonts.aladin(fontSize: 15, height: 1.3, color: GColor.whiteText),
+        GoogleFonts.aladin(fontSize: 13, height: 1, color: GColor.whiteText),
     bodyLarge:
-        GoogleFonts.aladin(fontSize: 18, height: 1.3, color: GColor.whiteText),
+        GoogleFonts.aladin(fontSize: 18, height: 1, color: GColor.whiteText),
     bodySmall:
-        GoogleFonts.aladin(fontSize: 13, height: 1.3, color: GColor.whiteText),
+        GoogleFonts.aladin(fontSize: 13, height: 1, color: GColor.whiteText),
   ),
+  cardColor: Colors.grey.shade800,
   colorScheme: const ColorScheme.dark(
     primary: GColor.lightBlue,
     onPrimary: GColor.whiteText,

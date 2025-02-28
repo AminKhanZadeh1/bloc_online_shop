@@ -18,12 +18,10 @@ class ProductBloc extends Bloc<ProductEvent, ProductState> {
       if (event is FetchProductsEvent) {
         emit(FetchProductsProcessState());
         try {
-          // Fetch products with timeout
           products = await FetchProdutsUseCase(_productRepo).call(null).timeout(
-            const Duration(seconds: 6), // Set your timeout duration here
+            const Duration(seconds: 6),
             onTimeout: () {
-              throw TimeoutException(
-                  "The operation has timed out."); // Custom timeout exception
+              throw TimeoutException("The operation has timed out.");
             },
           );
         } on TimeoutException catch (_) {

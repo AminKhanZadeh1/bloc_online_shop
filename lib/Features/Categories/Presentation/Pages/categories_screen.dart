@@ -80,20 +80,22 @@ class CategoriesScreen extends StatelessWidget {
                               ),
                               child: Column(
                                 children: [
-                                  Container(
-                                      margin: const EdgeInsets.only(top: 10),
-                                      child: CachedNetworkImage(
-                                        imageUrl: product2.image,
-                                        fit: BoxFit.cover,
-                                        height: 170,
-                                        placeholder: (context, url) =>
-                                            const Center(child: spinkit),
-                                        errorWidget: (context, url, error) =>
-                                            const Icon(
-                                          Icons.error,
-                                          color: Colors.red,
-                                        ),
-                                      )),
+                                  const SizedBox(
+                                    height: 20,
+                                  ),
+                                  CachedNetworkImage(
+                                    imageUrl: product2.image,
+                                    fit: BoxFit.cover,
+                                    height: 170,
+                                    width: 170,
+                                    placeholder: (context, url) =>
+                                        const Center(child: spinkit),
+                                    errorWidget: (context, url, error) =>
+                                        const Icon(
+                                      Icons.error,
+                                      color: Colors.red,
+                                    ),
+                                  ),
                                   const SizedBox(
                                     height: 10,
                                   ),

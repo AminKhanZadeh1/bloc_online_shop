@@ -51,6 +51,7 @@ class MyApp extends StatelessWidget {
         return MaterialApp.router(
           title: 'Online Shop',
           theme: theme,
+          darkTheme: theme,
           routerConfig: Routes.router,
           debugShowCheckedModeBanner: false,
           supportedLocales: L10n.all,

@@ -11,8 +11,10 @@ import 'package:bloc_online_shop/Features/Products/Domain/Entities/product_entit
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:go_router/go_router.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:iconly/iconly.dart';
 
 class OrderScreen extends StatelessWidget {
@@ -38,6 +40,7 @@ class OrderScreen extends StatelessWidget {
     return Scaffold(
       extendBody: true,
       appBar: AppBar(
+        scrolledUnderElevation: 0,
         leading: IconButton(
           onPressed: () => context.pop(),
           icon: const Icon(IconlyBold.arrow_left),
@@ -65,19 +68,38 @@ class OrderScreen extends StatelessWidget {
       key: const PageStorageKey('orderScreenList'),
       padding: const EdgeInsets.all(16.0),
       children: [
-        CachedNetworkImage(
-          imageUrl: item.image,
-          placeholder: (context, url) => SpinKitFadingCircle(),
-          errorWidget: (context, url, error) => const Icon(Icons.error),
-          height: 400,
-          width: double.maxFinite < 200 ? double.maxFinite : 200,
-          fit: BoxFit.fill,
+        Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: SizedBox(
+            height: 300,
+            width: 200,
+            child: ClipRRect(
+              borderRadius: const BorderRadius.all(Radius.circular(20)),
+              child: CachedNetworkImage(
+                imageUrl: item.image,
+                placeholder: (context, url) => SpinKitFadingCircle(),
+                errorWidget: (context, url, error) => const Icon(Icons.error),
+                fit: BoxFit.fill,
+              ),
+            ),
+          ),
+        ),
+        const SizedBox(
+          height: 20,
         ),
         Text(
+          textAlign: TextAlign.center,
           item.title,
+          style: const TextStyle(fontSize: 20),
         ),
         const SizedBox(height: 30),
-        Text(item.description),
+        Text(
+          item.description,
+          textAlign: TextAlign.center,
+        ),
+        const SizedBox(
+          height: 20,
+        ),
         IconButton(
             onPressed: () => BlocProvider.of<OrderBloc>(context).add(
                 AddToFavsEvent(FavEntity(
@@ -86,7 +108,15 @@ class OrderScreen extends StatelessWidget {
                     productName: item.title,
                     image: item.image,
                     price: item.price.toString()))),
-            icon: const Icon(IconlyBold.heart))
+            icon: const Icon(IconlyBold.heart)),
+        RatingBarIndicator(
+          rating: item.rating.rate,
+          itemBuilder: (context, index) =>
+              const Icon(Icons.star, color: Colors.amber),
+          itemCount: 5,
+          itemSize: 24.0,
+          direction: Axis.horizontal,
+        )
       ],
     );
   }
@@ -119,7 +149,12 @@ class OrderScreen extends StatelessWidget {
         padding: const EdgeInsets.symmetric(horizontal: 16),
         height: 65,
         decoration: BoxDecoration(
-          color: Colors.white,
+          border: Theme.of(context).brightness == Brightness.dark
+              ? Border.all(width: 2, color: Colors.white)
+              : null,
+          color: Theme.of(context).brightness == Brightness.light
+              ? const Color.fromARGB(255, 218, 238, 255)
+              : Colors.deepPurple,
           borderRadius: BorderRadius.circular(50),
         ),
         child: Row(
@@ -129,7 +164,10 @@ class OrderScreen extends StatelessWidget {
               onPressed: () => _updateCartQuantity(context, cartItem, -1),
               icon: Icon(cartItem.quantity == 1 ? Icons.delete : Icons.remove),
             ),
-            Text(cartItem.quantity.toString()),
+            Text(
+              cartItem.quantity.toString(),
+              style: const TextStyle(fontSize: 18),
+            ),
             IconButton(
               onPressed: () => _updateCartQuantity(context, cartItem, 1),
               icon: const Icon(Icons.add),
@@ -146,10 +184,20 @@ class OrderScreen extends StatelessWidget {
       child: SizedBox(
         height: 65,
         child: ElevatedButton(
-          style: const ButtonStyle(
-              elevation: WidgetStatePropertyAll(10),
-              backgroundColor: WidgetStatePropertyAll(GColor.white),
-              foregroundColor: WidgetStatePropertyAll(GColor.black)),
+          style: ButtonStyle(
+              side: WidgetStatePropertyAll(
+                Theme.of(context).brightness == Brightness.dark
+                    ? const BorderSide(width: 2, color: Colors.white)
+                    : null,
+              ),
+              backgroundColor: WidgetStatePropertyAll(
+                  Theme.of(context).brightness == Brightness.light
+                      ? const Color.fromARGB(255, 218, 238, 255)
+                      : Colors.deepPurple),
+              foregroundColor: WidgetStatePropertyAll(
+                  Theme.of(context).brightness == Brightness.light
+                      ? GColor.black
+                      : GColor.white)),
           onPressed: () {
             final order = OrderEntity(
               userId: UserAuth.userId,
@@ -161,7 +209,10 @@ class OrderScreen extends StatelessWidget {
             );
             context.read<OrderBloc>().add(AddToCartEvent(order));
           },
-          child: const Text('Add To Cart'),
+          child: Text(
+            'Add To Cart',
+            style: GoogleFonts.aladin(fontSize: 18),
+          ),
         ),
       ),
     );

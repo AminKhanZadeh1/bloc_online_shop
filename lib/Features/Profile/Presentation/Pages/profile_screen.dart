@@ -37,14 +37,28 @@ class _ProfileScreenState extends State<ProfileScreen>
               const SizedBox(
                 height: 15,
               ),
-              BlocBuilder<ThemeCubit, ThemeData>(
-                builder: (context, theme) {
-                  return Switch(
-                      value: theme == darkMode,
-                      onChanged: (value) {
-                        context.read<ThemeCubit>().toggleTheme();
-                      });
-                },
+              Row(
+                spacing: 5,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  const Icon(
+                    Icons.light_mode,
+                    size: 30,
+                  ),
+                  BlocBuilder<ThemeCubit, ThemeData>(
+                    builder: (context, theme) {
+                      return Switch(
+                          value: theme == darkMode,
+                          onChanged: (value) {
+                            context.read<ThemeCubit>().toggleTheme();
+                          });
+                    },
+                  ),
+                  const Icon(
+                    Icons.dark_mode_outlined,
+                    size: 30,
+                  )
+                ],
               )
             ],
           ),

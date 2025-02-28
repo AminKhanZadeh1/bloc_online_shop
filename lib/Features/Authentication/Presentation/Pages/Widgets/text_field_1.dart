@@ -1,3 +1,4 @@
+import 'package:bloc_online_shop/Config/Theme/Colors/g_color.dart';
 import 'package:flutter/material.dart';
 
 class TextField1 extends StatelessWidget {
@@ -28,6 +29,7 @@ class TextField1 extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      style: const TextStyle(color: GColor.black),
       validator: validator,
       controller: controller,
       obscureText: obscureText,
@@ -49,7 +51,9 @@ class TextField1 extends StatelessWidget {
           borderRadius: BorderRadius.circular(20),
           borderSide: const BorderSide(color: Colors.tealAccent),
         ),
-        fillColor: Colors.grey.shade200,
+        fillColor: Theme.of(context).brightness == Brightness.light
+            ? const Color.fromARGB(255, 225, 241, 255)
+            : Colors.grey.shade200,
         filled: true,
         hintStyle: TextStyle(color: Colors.grey[500]),
         errorText: errorMsg,

@@ -40,7 +40,7 @@ class _LoginScreenState extends State<LoginScreen>
       children: [
         Form(
             key: _formKey,
-            child: Column(children: [
+            child: Column(spacing: 10, children: [
               SizedBox(
                 width: width * 0.9,
                 height: 80,
@@ -52,7 +52,10 @@ class _LoginScreenState extends State<LoginScreen>
                   keyboardType: TextInputType.emailAddress,
                   prefixIcon: const Padding(
                     padding: EdgeInsets.symmetric(horizontal: 15, vertical: 10),
-                    child: Icon(CupertinoIcons.mail_solid),
+                    child: Icon(
+                      CupertinoIcons.mail_solid,
+                      color: Colors.black,
+                    ),
                   ),
                   errorMsg: widget.errorMsg,
                   validator: (val) {
@@ -81,7 +84,10 @@ class _LoginScreenState extends State<LoginScreen>
                       prefixIcon: const Padding(
                         padding:
                             EdgeInsets.symmetric(horizontal: 15, vertical: 10),
-                        child: Icon(CupertinoIcons.lock_fill),
+                        child: Icon(
+                          CupertinoIcons.lock_fill,
+                          color: Colors.black,
+                        ),
                       ),
                       errorMsg: widget.errorMsg,
                       validator: (val) {
@@ -140,10 +146,6 @@ class _LoginScreenState extends State<LoginScreen>
                                 child: Center(
                                   child: Text(
                                     'Login',
-                                    style: TextStyle(
-                                        color: Colors.white,
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 18),
                                   ),
                                 ),
                               ),
