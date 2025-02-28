@@ -101,14 +101,22 @@ class OrderScreen extends StatelessWidget {
           height: 20,
         ),
         IconButton(
-            onPressed: () => BlocProvider.of<OrderBloc>(context).add(
-                AddToFavsEvent(FavEntity(
-                    userId: UserAuth.userId,
-                    productId: item.id,
-                    productName: item.title,
-                    image: item.image,
-                    price: item.price.toString()))),
-            icon: const Icon(IconlyBold.heart)),
+          onPressed: () => BlocProvider.of<OrderBloc>(context).add(
+              AddToFavsEvent(FavEntity(
+                  userId: UserAuth.userId,
+                  productId: item.id,
+                  productName: item.title,
+                  image: item.image,
+                  price: item.price.toString()))),
+          // icon: const Icon(
+          //   IconlyBold.heart,
+          //   color: Colors.red,
+          // )
+          icon: Icon(
+            Icons.favorite_border_rounded,
+            color: Colors.red,
+          ),
+        ),
         RatingBarIndicator(
           rating: item.rating.rate,
           itemBuilder: (context, index) =>

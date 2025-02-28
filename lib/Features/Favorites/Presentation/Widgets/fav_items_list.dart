@@ -26,14 +26,22 @@ class FavItemsList extends StatelessWidget {
             child: Padding(
               padding: const EdgeInsets.symmetric(vertical: 8.0),
               child: Container(
-                decoration:
-                    BoxDecoration(borderRadius: BorderRadius.circular(20)),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(20),
+                  color: const Color.fromARGB(255, 203, 232, 255),
+                ),
                 child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
-                    CachedNetworkImage(imageUrl: item.image),
+                    Container(
+                      width: 150,
+                      color: Colors.white,
+                      child: CachedNetworkImage(
+                        imageUrl: item.image,
+                      ),
+                    ),
                     Text(item.productName),
-                    Text(item.price),
+                    Text("\$${item.price}"),
                     IconButton(
                         onPressed: () => context.read<FavoritesBloc>().add(
                             RemoveFromFavsEvent(productId: item.productId)),
