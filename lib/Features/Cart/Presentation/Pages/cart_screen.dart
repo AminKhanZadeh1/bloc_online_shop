@@ -48,8 +48,11 @@ class _CartScreenState extends State<CartScreen>
               state: state,
             ));
       } else if (state is CartLoadingState) {
-        return const Scaffold(
-          body: Center(child: spinkit),
+        return Scaffold(
+          body: Center(
+              child: Theme.of(context).brightness == Brightness.light
+                  ? blackSpinkit
+                  : whiteSpinkit),
         );
       } else if (state is CartErrorState) {
         return Scaffold(

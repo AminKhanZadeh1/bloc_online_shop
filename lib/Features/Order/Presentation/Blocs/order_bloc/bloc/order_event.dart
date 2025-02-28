@@ -12,12 +12,6 @@ class AddToCartEvent extends OrderEvent {
   const AddToCartEvent(this.orderEntity);
 }
 
-class CheckProductInCart extends OrderEvent {
-  final String productId;
-
-  const CheckProductInCart(this.productId);
-}
-
 class AddToFavsEvent extends OrderEvent {
   final FavEntity favEntity;
   const AddToFavsEvent(this.favEntity);

@@ -3,6 +3,7 @@ import 'package:bloc_online_shop/Config/Theme/spinkit.dart';
 import 'package:bloc_online_shop/Core/Utils/UserAuth_Check/user_auth.dart';
 import 'package:bloc_online_shop/Features/Cart/Presentation/Blocs/cart_bloc/bloc/cart_bloc.dart';
 import 'package:bloc_online_shop/Features/Favorites/Domain/Entities/fav_entity.dart';
+import 'package:bloc_online_shop/Features/Favorites/Presentation/Blocs/bloc/favorites_bloc.dart';
 import 'package:bloc_online_shop/Features/Shared/Models/rating_model.dart';
 import 'package:bloc_online_shop/Features/Order/Presentation/Blocs/order_bloc/bloc/order_bloc.dart';
 import 'package:bloc_online_shop/Features/Products/Presentation/blocs/product_bloc/bloc/product_bloc.dart';
@@ -37,6 +38,12 @@ class OrderScreen extends StatelessWidget {
             category: 'category',
             image: 'image',
             rating: Rating(rate: 0, count: 0));
+    final state = BlocProvider.of<FavoritesBloc>(context).state;
+    final favItem = state is FavsLoadedState
+        ? state.favProducts.firstWhere(
+            (element) => element!.productId == productId,
+          )
+        : null;
     return Scaffold(
       extendBody: true,
       appBar: AppBar(
@@ -46,7 +53,7 @@ class OrderScreen extends StatelessWidget {
           icon: const Icon(IconlyBold.arrow_left),
         ),
       ),
-      body: _buildBody(context, item),
+      body: _buildBody(context, item, favItem),
       bottomNavigationBar: _buildBottomNavigationBar(
           context,
           OrderEntity(
@@ -59,11 +66,12 @@ class OrderScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildBody(BuildContext context, ProductEntity item) {
-    return _buildProductDetails(context, item);
+  Widget _buildBody(BuildContext context, ProductEntity item, favItem) {
+    return _buildProductDetails(context, item, favItem);
   }
 
-  Widget _buildProductDetails(BuildContext context, ProductEntity item) {
+  Widget _buildProductDetails(
+      BuildContext context, ProductEntity item, favItem) {
     return ListView(
       key: const PageStorageKey('orderScreenList'),
       padding: const EdgeInsets.all(16.0),
@@ -101,21 +109,28 @@ class OrderScreen extends StatelessWidget {
           height: 20,
         ),
         IconButton(
-          onPressed: () => BlocProvider.of<OrderBloc>(context).add(
-              AddToFavsEvent(FavEntity(
+          onPressed: () {
+            if (favItem == null) {
+              BlocProvider.of<OrderBloc>(context).add(AddToFavsEvent(FavEntity(
                   userId: UserAuth.userId,
                   productId: item.id,
                   productName: item.title,
                   image: item.image,
-                  price: item.price.toString()))),
-          // icon: const Icon(
-          //   IconlyBold.heart,
-          //   color: Colors.red,
-          // )
-          icon: Icon(
-            Icons.favorite_border_rounded,
-            color: Colors.red,
-          ),
+                  price: item.price.toString())));
+            } else {
+              BlocProvider.of<FavoritesBloc>(context)
+                  .add(RemoveFromFavsEvent(productId: productId));
+            }
+          },
+          icon: favItem == null
+              ? const Icon(
+                  Icons.favorite_border_rounded,
+                  color: Colors.red,
+                )
+              : const Icon(
+                  Icons.favorite_rounded,
+                  color: Colors.red,
+                ),
         ),
         RatingBarIndicator(
           rating: item.rating.rate,
@@ -143,7 +158,10 @@ class OrderScreen extends StatelessWidget {
           return _buildAddToCartButton(context, cartItem!);
         }
         if (state is CartLoadingState) {
-          return const Center(child: spinkit);
+          return Center(
+              child: Theme.of(context).brightness == Brightness.light
+                  ? blackSpinkit
+                  : whiteSpinkit);
         }
         return const SizedBox.shrink();
       },

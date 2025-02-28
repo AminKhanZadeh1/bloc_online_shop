@@ -49,8 +49,11 @@ class TopSellsListWidget extends StatelessWidget {
                                   imageUrl: product2.image,
                                   fit: BoxFit.cover,
                                   height: 170,
-                                  placeholder: (context, url) =>
-                                      const Center(child: spinkit),
+                                  placeholder: (context, url) => Center(
+                                      child: Theme.of(context).brightness ==
+                                              Brightness.light
+                                          ? blackSpinkit
+                                          : whiteSpinkit),
                                   errorWidget: (context, url, error) =>
                                       const Icon(
                                     Icons.error,
@@ -102,7 +105,10 @@ class TopSellsListWidget extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 Text(state.message,
-                    style: const TextStyle(color: Colors.white)),
+                    style: TextStyle(
+                        color: Theme.of(context).brightness == Brightness.light
+                            ? Colors.black
+                            : Colors.white)),
                 const SizedBox(
                   height: 20,
                 ),
@@ -115,7 +121,10 @@ class TopSellsListWidget extends StatelessWidget {
               ],
             );
           }
-          return const Center(child: spinkit);
+          return Center(
+              child: Theme.of(context).brightness == Brightness.light
+                  ? blackSpinkit
+                  : whiteSpinkit);
         },
       ),
     );

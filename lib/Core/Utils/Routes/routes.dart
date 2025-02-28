@@ -33,6 +33,9 @@ class Routes {
           if (state.status == AuthenticationStatus.authenticated) {
             UserAuth.userId = FirebaseAuth.instance.currentUser!.uid;
             context.read<CartBloc>().add(FetchCartStreamEvent(UserAuth.userId));
+            context
+                .read<FavoritesBloc>()
+                .add(FetchFavStreamEvent(UserAuth.userId));
             return MultiBlocProvider(
               providers: [
                 BlocProvider<BottomNavCubit>(create: (_) => BottomNavCubit()),
@@ -40,13 +43,6 @@ class Routes {
                     create: (context) => NotificationCubit()),
                 BlocProvider<SearchBloc>(
                     create: (context) => SearchBloc(locator())),
-                BlocProvider<FavoritesBloc>(
-                    lazy: false,
-                    create: (context) {
-                      final favBloc = FavoritesBloc(locator());
-                      favBloc.add(FetchFavStreamEvent(UserAuth.userId));
-                      return favBloc;
-                    }),
               ],
               child: const MainWrapper(),
             );

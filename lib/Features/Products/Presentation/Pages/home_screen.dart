@@ -218,8 +218,13 @@ class _HomeScreenState extends State<HomeScreen>
                                                   imageUrl: result.image,
                                                   fit: BoxFit.cover,
                                                   placeholder: (context, url) =>
-                                                      const Center(
-                                                          child: spinkit),
+                                                      Center(
+                                                          child: Theme.of(context)
+                                                                      .brightness ==
+                                                                  Brightness
+                                                                      .light
+                                                              ? blackSpinkit
+                                                              : whiteSpinkit),
                                                   errorWidget:
                                                       (context, url, error) =>
                                                           const Icon(
@@ -256,8 +261,13 @@ class _HomeScreenState extends State<HomeScreen>
                                           padding: const EdgeInsets.all(8.0),
                                           child: ListView(
                                             shrinkWrap: true,
-                                            children: const [
-                                              Center(child: spinkit),
+                                            children: [
+                                              Center(
+                                                  child: Theme.of(context)
+                                                              .brightness ==
+                                                          Brightness.light
+                                                      ? blackSpinkit
+                                                      : whiteSpinkit),
                                             ],
                                           ),
                                         ),
