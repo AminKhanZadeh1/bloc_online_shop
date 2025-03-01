@@ -39,25 +39,27 @@ class OrderScreen extends StatelessWidget {
             image: 'image',
             rating: Rating(rate: 0, count: 0));
 
-    return Scaffold(
-      extendBody: true,
-      appBar: AppBar(
-        scrolledUnderElevation: 0,
-        leading: IconButton(
-          onPressed: () => context.pop(),
-          icon: const Icon(IconlyBold.arrow_left),
+    return SafeArea(
+      child: Scaffold(
+        extendBody: true,
+        appBar: AppBar(
+          scrolledUnderElevation: 0,
+          leading: IconButton(
+            onPressed: () => context.pop(),
+            icon: const Icon(IconlyBold.arrow_left),
+          ),
         ),
+        body: _buildBody(context, item),
+        bottomNavigationBar: _buildBottomNavigationBar(
+            context,
+            OrderEntity(
+                userId: UserAuth.userId,
+                productId: item.id,
+                productName: item.title,
+                image: item.image,
+                price: item.finalPrice.toStringAsFixed(2),
+                quantity: 0)),
       ),
-      body: _buildBody(context, item),
-      bottomNavigationBar: _buildBottomNavigationBar(
-          context,
-          OrderEntity(
-              userId: UserAuth.userId,
-              productId: item.id,
-              productName: item.title,
-              image: item.image,
-              price: item.finalPrice.toStringAsFixed(2),
-              quantity: 0)),
     );
   }
 

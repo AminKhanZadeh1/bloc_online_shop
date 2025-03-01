@@ -2,6 +2,7 @@ import 'package:bloc_online_shop/Features/Authentication/Presentation/Blocs/logi
 import 'package:bloc_online_shop/Features/Profile/Presentation/Widgets/Profile_Screen/profile_list_tile.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:iconly/iconly.dart';
 
 class ProfileListView extends StatelessWidget {
@@ -16,7 +17,9 @@ class ProfileListView extends StatelessWidget {
         ProfileListTile(
             onTap: () {}, title: 'Settings', icon: IconlyLight.setting),
         ProfileListTile(
-            onTap: () {}, title: 'About', icon: IconlyLight.info_circle),
+            onTap: () => context.push('/about'),
+            title: 'About',
+            icon: IconlyLight.info_circle),
         const SizedBox(
           height: 15,
         ),

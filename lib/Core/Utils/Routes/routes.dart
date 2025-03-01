@@ -12,6 +12,7 @@ import 'package:bloc_online_shop/Features/Order/Presentation/Pages/order_screen.
 import 'package:bloc_online_shop/Features/Products/Presentation/Cubits/Notifications/notifications_cubit.dart';
 import 'package:bloc_online_shop/Features/Products/Presentation/Pages/bottom_nav_cubit.dart';
 import 'package:bloc_online_shop/Features/Products/Presentation/Pages/main_wrapper.dart';
+import 'package:bloc_online_shop/Features/Profile/Presentation/Pages/about_screen.dart';
 import 'package:bloc_online_shop/Features/Search/Presentation/Blocs/search_bloc/search_bloc.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
@@ -23,6 +24,7 @@ class Routes {
   static const String orderPage = '/order';
   static const String categoriesPage = '/categories';
   static const String favoritesPage = '/favorites';
+  static const String aboutPage = '/about';
 
   static GoRouter router = GoRouter(initialLocation: initPage, routes: [
     GoRoute(
@@ -72,5 +74,9 @@ class Routes {
             category: category,
           );
         }),
+    GoRoute(
+      path: aboutPage,
+      builder: (context, state) => const AboutScreen(),
+    )
   ]);
 }
