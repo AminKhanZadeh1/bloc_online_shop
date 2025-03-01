@@ -58,12 +58,13 @@ class CartItemsList extends StatelessWidget {
                                     ),
                                     SizedBox(
                                       height: 35,
+                                      width: 110,
                                       child: Text(
                                         textAlign: TextAlign.center,
                                         item.productName.length > 25
                                             ? '${item.productName.substring(0, 22)}...'
                                             : item.productName,
-                                        style: const TextStyle(fontSize: 13),
+                                        style: const TextStyle(fontSize: 12),
                                       ),
                                     ),
                                     const SizedBox(
@@ -84,8 +85,8 @@ class CartItemsList extends StatelessWidget {
                   top: -70,
                   left: 8,
                   child: SizedBox(
-                    height: 140,
-                    width: 120,
+                    height: 120,
+                    width: 110,
                     child: ClipRRect(
                       borderRadius: BorderRadius.circular(20),
                       child: CachedNetworkImage(

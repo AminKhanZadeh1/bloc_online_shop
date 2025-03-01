@@ -5,7 +5,11 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 class SearchTextFieldWidget extends StatefulWidget {
   final TextEditingController searchController;
-  const SearchTextFieldWidget({required this.searchController, super.key});
+  final FocusNode searchFocusNode;
+  const SearchTextFieldWidget(
+      {required this.searchController,
+      required this.searchFocusNode,
+      super.key});
 
   @override
   State<SearchTextFieldWidget> createState() => _SearchTextFieldWidgetState();
@@ -21,6 +25,7 @@ class _SearchTextFieldWidgetState extends State<SearchTextFieldWidget> {
         onChanged: (value) {
           context.read<SearchBloc>().add(SearchQueryChanged(value));
         },
+        focusNode: widget.searchFocusNode,
         controller: widget.searchController,
         cursorColor: Colors.amber,
         decoration: InputDecoration(

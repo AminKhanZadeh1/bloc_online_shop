@@ -37,8 +37,10 @@ class CheckoutButton extends StatelessWidget {
                     margin: const EdgeInsets.only(top: 6),
                     height: 50,
                     width: 100,
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(5),
+                    decoration: const BoxDecoration(
+                        borderRadius: BorderRadius.only(
+                            topLeft: Radius.circular(25),
+                            topRight: Radius.circular(25)),
                         color: Colors.white),
                     child: Center(
                         child: Text(

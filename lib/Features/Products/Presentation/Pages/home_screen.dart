@@ -25,6 +25,8 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen>
     with AutomaticKeepAliveClientMixin {
   final TextEditingController searchController = TextEditingController();
+  final FocusNode searchFocusNode = FocusNode();
+
   @override
   bool get wantKeepAlive => true;
 
@@ -36,20 +38,17 @@ class _HomeScreenState extends State<HomeScreen>
     return PopScope(
       canPop: false,
       onPopInvoked: (didPop) {
-        if (searchController.text.isNotEmpty) {
-          FocusScope.of(context).unfocus();
-          searchController.clear();
-          BlocProvider.of<SearchBloc>(context).add(SearchFinishedEvent());
-        } else {
-          BlocProvider.of<SearchBloc>(context).add(SearchFinishedEvent());
-          Navigator.of(context).maybePop();
-        }
+        if (didPop) return;
+        FocusScope.of(context).unfocus();
+        searchController.clear();
+        searchFocusNode.unfocus();
+        BlocProvider.of<SearchBloc>(context).add(SearchFinishedEvent());
       },
       child: GestureDetector(
         onTap: () {
-          FocusScope.of(context).unfocus();
           searchController.text = '';
-          BlocProvider.of<SearchBloc>(context).add(SearchQueryChanged(''));
+          FocusScope.of(context).unfocus();
+          BlocProvider.of<SearchBloc>(context).add(SearchFinishedEvent());
         },
         child: Scaffold(
           extendBodyBehindAppBar: true,
@@ -73,6 +72,7 @@ class _HomeScreenState extends State<HomeScreen>
                     children: [
                       const Spacer(),
                       SearchTextFieldWidget(
+                        searchFocusNode: searchFocusNode,
                         searchController: searchController,
                       ),
                       const Spacer(),

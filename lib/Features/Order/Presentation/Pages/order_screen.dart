@@ -146,6 +146,9 @@ class OrderScreen extends StatelessWidget {
           itemCount: 5,
           itemSize: 24.0,
           direction: Axis.horizontal,
+        ),
+        const SizedBox(
+          height: 100,
         )
       ],
     );
@@ -202,7 +205,12 @@ class OrderScreen extends StatelessWidget {
               style: const TextStyle(fontSize: 18),
             ),
             IconButton(
-              onPressed: () => _updateCartQuantity(context, cartItem, 1),
+              onPressed: () {
+                if (cartItem.quantity == 9) {
+                  return;
+                }
+                _updateCartQuantity(context, cartItem, 1);
+              },
               icon: const Icon(Icons.add),
             ),
           ],

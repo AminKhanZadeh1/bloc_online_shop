@@ -1,5 +1,5 @@
 import 'package:bloc_online_shop/Features/Authentication/Presentation/Blocs/login_bloc/bloc/login_bloc.dart';
-import 'package:bloc_online_shop/Features/Profile/Presentation/Widgets/Profile_Screen/profile_list_tiles.dart';
+import 'package:bloc_online_shop/Features/Profile/Presentation/Widgets/Profile_Screen/profile_list_tile.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:iconly/iconly.dart';
@@ -11,11 +11,11 @@ class ProfileListView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        ProfileListTiles(
+        ProfileListTile(
             onTap: () {}, title: 'Ordered', icon: Icons.shopping_bag_outlined),
-        ProfileListTiles(
+        ProfileListTile(
             onTap: () {}, title: 'Settings', icon: IconlyLight.setting),
-        ProfileListTiles(
+        ProfileListTile(
             onTap: () {}, title: 'About', icon: IconlyLight.info_circle),
         const SizedBox(
           height: 15,
@@ -24,7 +24,7 @@ class ProfileListView extends StatelessWidget {
         const SizedBox(
           height: 15,
         ),
-        ProfileListTiles(
+        ProfileListTile(
             onTap: () =>
                 BlocProvider.of<LoginBloc>(context).add(LogOutRequest()),
             title: 'Logout',

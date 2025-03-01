@@ -108,12 +108,13 @@ class CategoriesScreen extends StatelessWidget {
                                     padding: const EdgeInsets.symmetric(
                                         horizontal: 10.0),
                                     child: SizedBox(
-                                      height: 40,
+                                      height: 35,
+                                      width: 170,
                                       child: Center(
                                         child: Text(
                                           textAlign: TextAlign.center,
-                                          product2.title.length > 50
-                                              ? "${product2.title.substring(0, 50)}..."
+                                          product2.title.length > 45
+                                              ? "${product2.title.substring(0, 42)}..."
                                               : product2.title,
                                           style: const TextStyle(
                                               color: Colors.black,

@@ -71,11 +71,11 @@ class TopSellsListWidget extends StatelessWidget {
                                 child: Center(
                                   child: Text(
                                     textAlign: TextAlign.center,
-                                    product2.title.length > 50
-                                        ? "${product2.title.substring(0, 50)}..."
+                                    product2.title.length > 45
+                                        ? "${product2.title.substring(0, 42)}..."
                                         : product2.title,
                                     style: const TextStyle(
-                                        color: Colors.black, fontSize: 13),
+                                        color: Colors.black, fontSize: 12),
                                   ),
                                 ),
                               ),

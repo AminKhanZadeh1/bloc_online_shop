@@ -7,43 +7,47 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 class SearchBloc extends Bloc<SearchEvent, SearchState> {
   final SearchRepo searchRepo;
-  List<ProductEntity>? allProducts;
+  List<ProductEntity>? allProducts = [];
   String? previousQuery;
 
   SearchBloc(this.searchRepo) : super(SearchInitial()) {
-    allProducts = [];
-    on<SearchQueryChanged>((event, emit) async {
-      if (allProducts == null || allProducts!.isEmpty) {
-        allProducts = await GetResultsUseCase(searchRepo).call(null);
-      }
-      if (event.query.isEmpty) {
-        emit(SearchEndedState());
-        return;
-      }
-      emit(SearchLoadingState());
+    on<SearchQueryChanged>(_onSearchQueryChanged);
+    on<SearchFinishedEvent>(_onSearchFinished);
+  }
 
-      final query = event.query;
-      final filteredProducts = allProducts!
-          .where((product) =>
-              product.title.toLowerCase().contains(query.toLowerCase()) ||
-              product.description.toLowerCase().contains(query.toLowerCase()))
-          .toList();
+  Future<void> _onSearchQueryChanged(
+      SearchQueryChanged event, Emitter<SearchState> emit) async {
+    if (allProducts == null || allProducts!.isEmpty) {
+      allProducts = await GetResultsUseCase(searchRepo).call(null);
+    }
 
-      if (filteredProducts.isEmpty) {
+    if (event.query.isEmpty) {
+      emit(SearchEndedState());
+      return;
+    }
+
+    emit(SearchLoadingState());
+
+    final filteredProducts = allProducts!
+        .where((product) =>
+            product.title.toLowerCase().contains(event.query.toLowerCase()) ||
+            product.description
+                .toLowerCase()
+                .contains(event.query.toLowerCase()))
+        .toList();
+
+    if (filteredProducts.isEmpty) {
+      if (event.query.contains(previousQuery ?? '')) {
         emit(SearchErrorState(message: "No Items found"));
-        previousQuery = event.query;
-        if (event.query.contains(previousQuery ?? '')) {
-          emit(SearchErrorState(message: "No Items found"));
-        }
-      } else {
-        await Future.delayed(const Duration(milliseconds: 500));
-        emit(SearchLoadedState(products: filteredProducts));
       }
-    });
-    on<SearchFinishedEvent>(
-      (event, emit) {
-        emit(SearchEndedState());
-      },
-    );
+      previousQuery = event.query;
+    } else {
+      await Future.delayed(const Duration(milliseconds: 500));
+      emit(SearchLoadedState(products: filteredProducts));
+    }
+  }
+
+  void _onSearchFinished(SearchFinishedEvent event, Emitter<SearchState> emit) {
+    emit(SearchEndedState());
   }
 }

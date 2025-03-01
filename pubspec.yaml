@@ -57,6 +57,7 @@ dependencies:
   lucide_icons_flutter: ^1.2.7
   smooth_page_indicator: ^1.2.1
   flutter_rating_bar: ^4.0.1
+  url_launcher: ^6.3.1
 
 dev_dependencies:
   flutter_test:
