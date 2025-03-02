@@ -47,13 +47,13 @@ class FavItemsList extends StatelessWidget {
                         ),
                         SizedBox(
                           height: 40,
-                          width: MediaQuery.sizeOf(context).width * 0.3,
+                          width: MediaQuery.sizeOf(context).width * 0.25,
                           child: Center(
                             child: Text(
                               textAlign: TextAlign.center,
-                              item.productName.length > 45
-                                  ? '${item.productName.substring(0, 42)}...'
-                                  : item.productName,
+                              item.productName,
+                              maxLines: 2,
+                              overflow: TextOverflow.visible,
                               style: const TextStyle(fontSize: 13),
                             ),
                           ),

@@ -59,13 +59,15 @@ class CartItemsList extends StatelessWidget {
                                     SizedBox(
                                       height: 35,
                                       width: MediaQuery.sizeOf(context).width *
-                                          0.3,
-                                      child: Text(
-                                        textAlign: TextAlign.center,
-                                        item.productName.length > 45
-                                            ? '${item.productName.substring(0, 42)}...'
-                                            : item.productName,
-                                        style: const TextStyle(fontSize: 12),
+                                          0.25,
+                                      child: Center(
+                                        child: Text(
+                                          textAlign: TextAlign.center,
+                                          item.productName,
+                                          maxLines: 2,
+                                          overflow: TextOverflow.visible,
+                                          style: const TextStyle(fontSize: 12),
+                                        ),
                                       ),
                                     ),
                                     const SizedBox(

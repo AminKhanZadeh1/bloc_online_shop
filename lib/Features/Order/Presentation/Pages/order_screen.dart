@@ -1,5 +1,6 @@
 import 'package:bloc_online_shop/Config/Theme/Colors/g_color.dart';
 import 'package:bloc_online_shop/Config/Theme/spinkit.dart';
+import 'package:bloc_online_shop/Config/toast.dart';
 import 'package:bloc_online_shop/Core/Utils/UserAuth_Check/user_auth.dart';
 import 'package:bloc_online_shop/Features/Cart/Presentation/Blocs/cart_bloc/bloc/cart_bloc.dart';
 import 'package:bloc_online_shop/Features/Favorites/Domain/Entities/fav_entity.dart';
@@ -126,9 +127,11 @@ class OrderScreen extends StatelessWidget {
                               productName: item.title,
                               image: item.image,
                               price: item.price.toString())));
+                      showToast(message: 'Added to favorites');
                     } else {
                       BlocProvider.of<FavoritesBloc>(context)
                           .add(RemoveFromFavsEvent(productId: productId));
+                      showToast(message: 'Removed from favorites');
                     }
                   },
                   icon: Icon(
