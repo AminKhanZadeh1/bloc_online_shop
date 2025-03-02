@@ -126,7 +126,7 @@ class OrderScreen extends StatelessWidget {
                               productId: item.id,
                               productName: item.title,
                               image: item.image,
-                              price: item.price.toString())));
+                              price: item.finalPrice.toString())));
                       showToast(message: 'Added to favorites');
                     } else {
                       BlocProvider.of<FavoritesBloc>(context)
@@ -253,8 +253,8 @@ class OrderScreen extends StatelessWidget {
             context.read<OrderBloc>().add(AddToCartEvent(order));
           },
           child: Text(
-            'Add To Cart',
-            style: GoogleFonts.aladin(fontSize: 18),
+            'Add To Cart    \$${item.price}',
+            style: GoogleFonts.aladin(fontSize: 20),
           ),
         ),
       ),
