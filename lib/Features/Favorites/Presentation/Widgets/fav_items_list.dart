@@ -39,7 +39,7 @@ class FavItemsList extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: [
                         Container(
-                          width: 70,
+                          width: 80,
                           color: Colors.white,
                           child: CachedNetworkImage(
                             imageUrl: item.image,
