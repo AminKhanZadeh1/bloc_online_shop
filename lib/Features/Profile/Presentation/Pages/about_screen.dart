@@ -7,9 +7,9 @@ class AboutScreen extends StatelessWidget {
   const AboutScreen({super.key});
 
   Future<void> _launchURL(String url) async {
-    if (await canLaunchUrl(Uri.parse(url))) {
+    try {
       await launchUrl(Uri.parse(url));
-    } else {
+    } catch (e) {
       throw 'Could not launch $url';
     }
   }
@@ -34,7 +34,7 @@ class AboutScreen extends StatelessWidget {
             children: [
               const Text(
                 textAlign: TextAlign.center,
-                'I hope you enjoyed using the app :).\nThis app is using Flutter and Dart language\nwith Bloc state management and clean architecture. APIs: (Firebase & Fakestore).\n\nPlease follow me on Social Media:',
+                'I hope you enjoyed using the app.\nThis app is using Flutter and Dart language\nwith Bloc state management and clean architecture. APIs: (Firebase & Fakestore).\n\nThanks for your support :)',
                 style: TextStyle(fontSize: Checkbox.width * 1.2),
               ),
               const SizedBox(
