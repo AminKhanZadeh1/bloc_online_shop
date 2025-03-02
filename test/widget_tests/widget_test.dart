@@ -1,10 +1,12 @@
 // ignore_for_file: depend_on_referenced_packages
 
+import 'package:bloc_online_shop/Config/Theme/Theme_Cubit/cubit/theme_cubit.dart';
 import 'package:bloc_online_shop/Core/DI/locator.dart';
 import 'package:bloc_online_shop/Features/Authentication/Presentation/Blocs/authentication_bloc/bloc/authentication_bloc.dart';
 import 'package:bloc_online_shop/Features/Authentication/Presentation/Blocs/login_bloc/bloc/login_bloc.dart';
 import 'package:bloc_online_shop/Features/Authentication/Presentation/Blocs/sign_up_bloc/bloc/sign_up_bloc.dart';
-import 'package:bloc_online_shop/Features/Products/Presentation/Pages/main_wrapper.dart';
+import 'package:bloc_online_shop/Features/Cart/Presentation/Blocs/cart_bloc/bloc/cart_bloc.dart';
+import 'package:bloc_online_shop/Features/Favorites/Presentation/Blocs/bloc/favorites_bloc.dart';
 import 'package:bloc_online_shop/Features/Products/Presentation/blocs/product_bloc/bloc/product_bloc.dart';
 import 'package:bloc_online_shop/firebase_options.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -22,6 +24,9 @@ void main() async {
   );
   FirebaseAuth.instance.setSettings(appVerificationDisabledForTesting: true);
 
+  late ThemeCubit themeCubit;
+  late CartBloc cartBloc;
+  late FavoritesBloc favoritesBloc;
   late AuthenticationBloc authenticationBloc;
   late LoginBloc loginBloc;
   late SignUpBloc signUpBloc;
@@ -30,6 +35,9 @@ void main() async {
   group('Authentication', () {
     setUp(() async {
       await setup();
+      themeCubit = ThemeCubit();
+      cartBloc = CartBloc(locator());
+      favoritesBloc = FavoritesBloc(locator());
       authenticationBloc = AuthenticationBloc(locator());
       loginBloc = LoginBloc(locator());
       signUpBloc = SignUpBloc(locator());
@@ -40,6 +48,9 @@ void main() async {
       await tester.pumpWidget(
         MultiBlocProvider(
           providers: [
+            BlocProvider<ThemeCubit>.value(value: themeCubit),
+            BlocProvider<CartBloc>.value(value: cartBloc),
+            BlocProvider<FavoritesBloc>.value(value: favoritesBloc),
             BlocProvider<AuthenticationBloc>.value(value: authenticationBloc),
             BlocProvider<LoginBloc>.value(value: loginBloc),
             BlocProvider<SignUpBloc>.value(value: signUpBloc),
@@ -59,7 +70,7 @@ void main() async {
       await Future.delayed(const Duration(seconds: 2));
       await tester.pumpAndSettle();
 
-      expect(find.byType(MainWrapper), findsOneWidget);
+      expect(find.byType(MultiBlocProvider), findsOneWidget);
     });
   });
 }
