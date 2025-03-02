@@ -31,9 +31,7 @@ class CategoriesScreen extends StatelessWidget {
           builder: (context, state) {
             if (state is FetchProductsProcessState) {
               return Center(
-                child: Theme.of(context).brightness == Brightness.light
-                    ? blackSpinkit
-                    : whiteSpinkit,
+                child: spinkit,
               );
             } else if (state is FetchProductsSuccessState) {
               List<ProductEntity> rawData = state.products;
@@ -90,11 +88,8 @@ class CategoriesScreen extends StatelessWidget {
                                     fit: BoxFit.cover,
                                     height: 170,
                                     width: 170,
-                                    placeholder: (context, url) => Center(
-                                        child: Theme.of(context).brightness ==
-                                                Brightness.light
-                                            ? blackSpinkit
-                                            : whiteSpinkit),
+                                    placeholder: (context, url) =>
+                                        Center(child: spinkit),
                                     errorWidget: (context, url, error) =>
                                         const Icon(
                                       Icons.error,

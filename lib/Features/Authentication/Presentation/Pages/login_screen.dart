@@ -139,7 +139,7 @@ class _LoginScreenState extends State<LoginScreen>
                         padding: const EdgeInsets.symmetric(
                             horizontal: 10, vertical: 15),
                         child: state is LoginProcess
-                            ? whiteLoadingSpinkit
+                            ? authLoadingSpinkit
                             : const SizedBox(
                                 height: 25,
                                 width: 50,

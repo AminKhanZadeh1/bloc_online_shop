@@ -19,10 +19,7 @@ class _FavoritesScreenState extends State<FavoritesScreen>
     return Scaffold(body: BlocBuilder<FavoritesBloc, FavoritesState>(
       builder: (context, state) {
         if (state is FavsLoadingState) {
-          return Center(
-              child: Theme.of(context).brightness == Brightness.light
-                  ? blackSpinkit
-                  : whiteSpinkit);
+          return Center(child: spinkit);
         } else if (state is FavsErrorState) {
           return Center(
             child: Text(

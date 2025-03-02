@@ -170,10 +170,7 @@ class OrderScreen extends StatelessWidget {
           return _buildAddToCartButton(context, cartItem!);
         }
         if (state is CartLoadingState) {
-          return Center(
-              child: Theme.of(context).brightness == Brightness.light
-                  ? blackSpinkit
-                  : whiteSpinkit);
+          return Center(child: spinkit);
         }
         return const SizedBox.shrink();
       },

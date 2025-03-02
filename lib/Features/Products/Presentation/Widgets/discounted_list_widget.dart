@@ -62,11 +62,8 @@ class DiscountedListWidget extends StatelessWidget {
                                 width: double.infinity,
                                 imageUrl: product.image,
                                 fit: BoxFit.cover,
-                                placeholder: (context, url) => Center(
-                                    child: Theme.of(context).brightness ==
-                                            Brightness.light
-                                        ? blackSpinkit
-                                        : whiteSpinkit),
+                                placeholder: (context, url) =>
+                                    Center(child: spinkit),
                                 errorWidget: (context, url, error) =>
                                     const Icon(
                                   Icons.error,
@@ -259,10 +256,7 @@ class DiscountedListWidget extends StatelessWidget {
               ],
             );
           }
-          return Center(
-              child: Theme.of(context).brightness == Brightness.light
-                  ? blackSpinkit
-                  : whiteSpinkit);
+          return Center(child: spinkit);
         },
       ),
     );

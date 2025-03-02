@@ -94,11 +94,7 @@ class CartItemsList extends StatelessWidget {
                         width: double.infinity,
                         imageUrl: item.image,
                         fit: BoxFit.cover,
-                        placeholder: (context, url) => Center(
-                            child:
-                                Theme.of(context).brightness == Brightness.light
-                                    ? blackSpinkit
-                                    : whiteSpinkit),
+                        placeholder: (context, url) => Center(child: spinkit),
                         errorWidget: (context, url, error) => const Icon(
                           Icons.error,
                           color: Colors.red,

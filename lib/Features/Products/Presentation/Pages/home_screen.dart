@@ -218,13 +218,7 @@ class _HomeScreenState extends State<HomeScreen>
                                                   imageUrl: result.image,
                                                   fit: BoxFit.cover,
                                                   placeholder: (context, url) =>
-                                                      Center(
-                                                          child: Theme.of(context)
-                                                                      .brightness ==
-                                                                  Brightness
-                                                                      .light
-                                                              ? blackSpinkit
-                                                              : whiteSpinkit),
+                                                      Center(child: spinkit),
                                                   errorWidget:
                                                       (context, url, error) =>
                                                           const Icon(
@@ -262,12 +256,7 @@ class _HomeScreenState extends State<HomeScreen>
                                           child: ListView(
                                             shrinkWrap: true,
                                             children: [
-                                              Center(
-                                                  child: Theme.of(context)
-                                                              .brightness ==
-                                                          Brightness.light
-                                                      ? blackSpinkit
-                                                      : whiteSpinkit),
+                                              Center(child: spinkit),
                                             ],
                                           ),
                                         ),
